@@ -372,6 +372,7 @@ local Templates = {
     --// Library \\--
     Window = {
         Title = "No Title",
+        GameName = "",
         Version = "",
         Footer = "No Footer",
 
@@ -10963,23 +10964,11 @@ function Library:CreateWindow(WindowInfo)
             BackgroundTransparency = 1,
             Size = UDim2.new(1, 0, 0, 20),
             Text = WindowInfo.Title,
-            TextSize = 16,
+            TextSize = 20,
             TextTruncate = Enum.TextTruncate.AtEnd,
             TextXAlignment = Enum.TextXAlignment.Left,
             Parent = TitleInfo,
         })
-        New("TextLabel", {
-            BackgroundTransparency = 1,
-            Size = UDim2.new(1, 0, 0, 14),
-            Text = WindowInfo.Version,
-            TextSize = 12,
-            TextTransparency = 0.5,
-            TextTruncate = Enum.TextTruncate.AtEnd,
-            TextXAlignment = Enum.TextXAlignment.Left,
-            Visible = WindowInfo.Version ~= "",
-            Parent = TitleInfo,
-        })
-
         --// Top Right Bar \\--
         RightWrapper = New("Frame", {
             AnchorPoint = Vector2.new(1, 0.5),
@@ -10991,7 +10980,7 @@ function Library:CreateWindow(WindowInfo)
 
         New("UIListLayout", {
             FillDirection = Enum.FillDirection.Horizontal,
-            HorizontalAlignment = Enum.HorizontalAlignment.Right,
+            HorizontalAlignment = Enum.HorizontalAlignment.Left,
             VerticalAlignment = Enum.VerticalAlignment.Center,
             Padding = UDim.new(0, 8),
             Parent = RightWrapper,
@@ -10999,7 +10988,7 @@ function Library:CreateWindow(WindowInfo)
 
         CurrentTabInfo = New("Frame", {
             Size = UDim2.fromScale(WindowInfo.DisableSearch and 1 or 0.5, 1),
-            Visible = false,
+            Visible = WindowInfo.GameName ~= "",
             BackgroundTransparency = 1,
             Parent = RightWrapper,
         })
@@ -11028,8 +11017,9 @@ function Library:CreateWindow(WindowInfo)
             BackgroundTransparency = 1,
             Size = UDim2.fromScale(1, 0),
             AutomaticSize = Enum.AutomaticSize.Y,
-            Text = "",
+            Text = WindowInfo.GameName,
             TextSize = 14,
+            TextTruncate = Enum.TextTruncate.AtEnd,
             TextXAlignment = Enum.TextXAlignment.Left,
             Parent = CurrentTabInfo,
         })
@@ -11038,9 +11028,9 @@ function Library:CreateWindow(WindowInfo)
             BackgroundTransparency = 1,
             Size = UDim2.fromScale(1, 0),
             AutomaticSize = Enum.AutomaticSize.Y,
-            Text = "",
+            Text = WindowInfo.Version,
             TextWrapped = true,
-            TextSize = 14,
+            TextSize = 12,
             TextXAlignment = Enum.TextXAlignment.Left,
             TextTransparency = 0.5,
             Parent = CurrentTabInfo,
@@ -11497,6 +11487,9 @@ function Library:CreateWindow(WindowInfo)
     end
 
     function Window:ShowTabInfo(Name, Description)
+        if WindowInfo.GameName ~= "" then
+            return
+        end
         CurrentTabLabel.Text = Name
         CurrentTabDescription.Text = Description
 
@@ -11507,6 +11500,9 @@ function Library:CreateWindow(WindowInfo)
     end
 
     function Window:HideTabInfo()
+        if WindowInfo.GameName ~= "" then
+            return
+        end
         CurrentTabInfo.Visible = false
         if IsDefaultSearchbarSize then
             SearchBox.Size = UDim2.fromScale(1, 1)

@@ -97,7 +97,8 @@ pcall(function()
 end)
 
 local window = Library:CreateWindow({
-	Title = gameName,
+	Title = "PIXEL HUB",
+	GameName = gameName,
 	Version = "v" .. tostring(game.PlaceVersion),
 	Footer = "PixelHub",
 	Center = true,
