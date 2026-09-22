@@ -10966,10 +10966,10 @@ function Library:CreateWindow(WindowInfo)
         })
         WindowTitle = New("TextLabel", {
             BackgroundTransparency = 1,
-            Size = UDim2.new(1, 0, 0, 20),
+            Size = UDim2.new(1, 0, 0, 28),
             Text = WindowInfo.Title,
             Font = Enum.Font.GothamBold,
-            TextSize = 22,
+            TextSize = 24,
             TextTruncate = Enum.TextTruncate.AtEnd,
             TextXAlignment = Enum.TextXAlignment.Left,
             Parent = TitleInfo,
@@ -10979,7 +10979,7 @@ function Library:CreateWindow(WindowInfo)
             AnchorPoint = Vector2.new(1, 0.5),
             BackgroundTransparency = 1,
             Position = UDim2.new(1, -10, 0.5, 0),
-            Size = UDim2.new(1, -InitialLeftWidth - 19, 1, -16),
+            Size = UDim2.new(1, -InitialLeftWidth - 19, 1, -8),
             Parent = TopBar,
         })
 
@@ -11004,10 +11004,9 @@ function Library:CreateWindow(WindowInfo)
             VerticalAlignment = Enum.VerticalAlignment.Center,
             Parent = CurrentTabInfo,
         })
-
         CurrentTabLabel = New("TextLabel", {
             BackgroundTransparency = 1,
-            Size = UDim2.new(1, 0, 0, 16),
+            Size = UDim2.new(1, 0, 0, 18),
             Text = WindowInfo.GameName,
             TextSize = 14,
             TextTruncate = Enum.TextTruncate.AtEnd,
@@ -11019,9 +11018,9 @@ function Library:CreateWindow(WindowInfo)
             BackgroundTransparency = 1,
             Size = UDim2.new(1, 0, 0, 13),
             Text = WindowInfo.Version,
-            TextSize = 11,
+            TextSize = 10,
             TextXAlignment = Enum.TextXAlignment.Left,
-            TextTransparency = 0.5,
+            TextTransparency = 0.65,
             Parent = CurrentTabInfo,
         })
 
@@ -11463,7 +11462,7 @@ function Library:CreateWindow(WindowInfo)
         DividerLine.Position = UDim2.fromOffset(Width, 0)
 
         TitleHolder.Size = UDim2.new(0, Width, 1, 0)
-        RightWrapper.Size = UDim2.new(1, -Width - 19, 1, -16)
+        RightWrapper.Size = UDim2.new(1, -Width - 19, 1, -8)
         Tabs.Size = UDim2.new(0, Width, 1, -70)
         Container.Size = UDim2.new(1, -Width - 1, 1, -70)
 

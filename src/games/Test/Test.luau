@@ -1,43 +1,26 @@
 local repo = "https://raw.githubusercontent.com/aechlaenm/PixelHub/main/"
 local environment = (getgenv and getgenv()) or shared or _G
 
+if not game:IsLoaded() then
+	game.Loaded:Wait()
+end
+
 local function unloadPrevious()
+	local unloaded = false
 	if type(environment.PixelHubUnload) == "function" then
-		pcall(environment.PixelHubUnload)
+		unloaded = pcall(environment.PixelHubUnload)
 	end
 
-	local previous = environment.PixelHubLibrary or environment.Library
-	if type(previous) == "table" and type(previous.Unload) == "function" then
+	local previous = environment.PixelHubLibrary or environment.library or environment.Library
+	if not unloaded and type(previous) == "table" and type(previous.Unload) == "function" then
 		for _, toggle in previous.Toggles or {} do
 			if toggle.Value and type(toggle.SetValue) == "function" then
-				toggle:SetValue(false)
+				pcall(toggle.SetValue, toggle, false)
 			end
 		end
 		pcall(previous.Unload, previous)
 	end
 
-	local roots = { game:GetService("CoreGui") }
-	local playerGui = game:GetService("Players").LocalPlayer:FindFirstChildOfClass("PlayerGui")
-	if playerGui then
-		table.insert(roots, playerGui)
-	end
-	if gethui then
-		pcall(function()
-			table.insert(roots, gethui())
-		end)
-	end
-
-	for _, root in roots do
-		pcall(function()
-			for _, child in root:GetChildren() do
-				if child:IsA("ScreenGui") and (child.Name == "Obsidian" or child.Name == "PixelHubObsidian") then
-					child:Destroy()
-				end
-			end
-		end)
-	end
-
-	game:GetService("UserInputService").MouseIconEnabled = true
 end
 unloadPrevious()
 
@@ -53,11 +36,9 @@ end
 
 local Library = loadModule("library/ui/Library.luau")
 assert(type(Library.CreateWindow) == "function", "Obsidian Library missing CreateWindow")
-if Library.ScreenGui then
-	Library.ScreenGui.Name = "PixelHubObsidian"
-end
 environment.Library = Library
 environment.PixelHubLibrary = Library
+environment.library = Library
 
 local function unload()
 	if not Library.Unloaded then
@@ -69,8 +50,10 @@ local function unload()
 		Library:Unload()
 	end
 
-	if environment.PixelHubLibrary == Library then
-		environment.PixelHubLibrary = nil
+	for _, key in { "PixelHubLibrary", "Library", "library" } do
+		if environment[key] == Library then
+			environment[key] = nil
+		end
 	end
 	if environment.PixelHubUnload == unload then
 		environment.PixelHubUnload = nil
