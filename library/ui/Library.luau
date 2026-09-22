@@ -10920,9 +10920,13 @@ function Library:CreateWindow(WindowInfo)
         })
         New("UIListLayout", {
             FillDirection = Enum.FillDirection.Horizontal,
-            HorizontalAlignment = Enum.HorizontalAlignment.Center,
+            HorizontalAlignment = Enum.HorizontalAlignment.Left,
             VerticalAlignment = Enum.VerticalAlignment.Center,
             Padding = UDim.new(0, 6),
+            Parent = TitleHolder,
+        })
+        New("UIPadding", {
+            PaddingLeft = UDim.new(0, 12),
             Parent = TitleHolder,
         })
 
@@ -10964,7 +10968,8 @@ function Library:CreateWindow(WindowInfo)
             BackgroundTransparency = 1,
             Size = UDim2.new(1, 0, 0, 20),
             Text = WindowInfo.Title,
-            TextSize = 20,
+            Font = Enum.Font.GothamBold,
+            TextSize = 22,
             TextTruncate = Enum.TextTruncate.AtEnd,
             TextXAlignment = Enum.TextXAlignment.Left,
             Parent = TitleInfo,
@@ -10993,11 +10998,6 @@ function Library:CreateWindow(WindowInfo)
             Parent = RightWrapper,
         })
 
-        New("UIFlexItem", {
-            FlexMode = Enum.UIFlexMode.Grow,
-            Parent = CurrentTabInfo,
-        })
-
         New("UIListLayout", {
             FillDirection = Enum.FillDirection.Vertical,
             HorizontalAlignment = Enum.HorizontalAlignment.Left,
@@ -11005,18 +11005,9 @@ function Library:CreateWindow(WindowInfo)
             Parent = CurrentTabInfo,
         })
 
-        New("UIPadding", {
-            PaddingBottom = UDim.new(0, 8),
-            PaddingLeft = UDim.new(0, 8),
-            PaddingRight = UDim.new(0, 8),
-            PaddingTop = UDim.new(0, 8),
-            Parent = CurrentTabInfo,
-        })
-
         CurrentTabLabel = New("TextLabel", {
             BackgroundTransparency = 1,
-            Size = UDim2.fromScale(1, 0),
-            AutomaticSize = Enum.AutomaticSize.Y,
+            Size = UDim2.new(1, 0, 0, 16),
             Text = WindowInfo.GameName,
             TextSize = 14,
             TextTruncate = Enum.TextTruncate.AtEnd,
@@ -11026,11 +11017,9 @@ function Library:CreateWindow(WindowInfo)
 
         CurrentTabDescription = New("TextLabel", {
             BackgroundTransparency = 1,
-            Size = UDim2.fromScale(1, 0),
-            AutomaticSize = Enum.AutomaticSize.Y,
+            Size = UDim2.new(1, 0, 0, 13),
             Text = WindowInfo.Version,
-            TextWrapped = true,
-            TextSize = 12,
+            TextSize = 11,
             TextXAlignment = Enum.TextXAlignment.Left,
             TextTransparency = 0.5,
             Parent = CurrentTabInfo,

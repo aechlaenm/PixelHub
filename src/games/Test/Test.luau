@@ -98,6 +98,8 @@ end)
 
 local window = Library:CreateWindow({
 	Title = "PixelHub",
+	GameName = gameName,
+	Version = "v" .. tostring(game.PlaceVersion),
 	Footer = "PixelHub",
 	Center = true,
 	AutoShow = true,
@@ -108,40 +110,6 @@ local controls = window:AddTab("Controls"):AddGroupbox({
 	Side = "Left",
 	Name = "Basic",
 })
-
-local gameHeader = Instance.new("Frame")
-gameHeader.BackgroundTransparency = 1
-gameHeader.LayoutOrder = -2
-gameHeader.Size = UDim2.new(1, 0, 0, 48)
-gameHeader.Parent = controls.Container.Parent.Parent.Parent
-
-local headerLayout = Instance.new("UIListLayout")
-headerLayout.SortOrder = Enum.SortOrder.LayoutOrder
-headerLayout.VerticalAlignment = Enum.VerticalAlignment.Center
-headerLayout.Parent = gameHeader
-
-local headerPadding = Instance.new("UIPadding")
-headerPadding.PaddingLeft = UDim.new(0, 12)
-headerPadding.Parent = gameHeader
-
-local function addHeaderLine(text, size, transparency, order)
-	local label = Instance.new("TextLabel")
-	label.BackgroundTransparency = 1
-	label.Font = Enum.Font.Code
-	label.Size = UDim2.new(1, -12, 0, size + 2)
-	label.Text = text
-	label.TextColor3 = Library.Scheme.FontColor
-	Library:AddToRegistry(label, { TextColor3 = "FontColor" })
-	label.TextSize = size
-	label.TextTransparency = transparency
-	label.TextTruncate = Enum.TextTruncate.AtEnd
-	label.TextXAlignment = Enum.TextXAlignment.Left
-	label.LayoutOrder = order
-	label.Parent = gameHeader
-end
-
-addHeaderLine(gameName, 18, 0, 1)
-addHeaderLine("v" .. tostring(game.PlaceVersion), 13, 0.45, 2)
 
 controls:AddButton({
 	Text = "Button test",
