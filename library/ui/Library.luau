@@ -252,7 +252,7 @@ local Library = {
     ShowToggleFrameInKeybinds = true,
 
     NotifyOnError = false,
-    ShowCustomCursor = true,
+    ShowCustomCursor = false,
     ForceCheckbox = false,
 
     CantDragForced = false,
@@ -395,7 +395,7 @@ local Templates = {
 
         CornerRadius = 4,
         NotifySide = "Right",
-        ShowCustomCursor = true,
+        ShowCustomCursor = false,
 
         Font = Enum.Font.Code,
         ToggleKeybind = Enum.KeyCode.RightControl,

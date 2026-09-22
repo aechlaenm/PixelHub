@@ -1,22 +1,49 @@
 local repo = "https://raw.githubusercontent.com/aechlaenm/PixelHub/main/"
-local environment = (getgenv and getgenv()) or shared
-local previousLibrary = environment.PixelHubLibrary or environment.Library
+local environment = (getgenv and getgenv()) or shared or _G
 
-if type(previousLibrary) == "table"
-	and type(previousLibrary.CreateWindow) == "function"
-	and type(previousLibrary.Unload) == "function"
-then
-	for _, toggle in previousLibrary.Toggles or {} do
-		if toggle.Value and type(toggle.SetValue) == "function" then
-			toggle:SetValue(false)
-		end
+local function unloadPrevious()
+	if type(environment.PixelHubUnload) == "function" then
+		pcall(environment.PixelHubUnload)
 	end
 
-	previousLibrary:Unload()
+	local previous = environment.PixelHubLibrary or environment.Library
+	if type(previous) == "table" and type(previous.Unload) == "function" then
+		for _, toggle in previous.Toggles or {} do
+			if toggle.Value and type(toggle.SetValue) == "function" then
+				toggle:SetValue(false)
+			end
+		end
+		pcall(previous.Unload, previous)
+	end
+
+	local roots = { game:GetService("CoreGui") }
+	local playerGui = game:GetService("Players").LocalPlayer:FindFirstChildOfClass("PlayerGui")
+	if playerGui then
+		table.insert(roots, playerGui)
+	end
+	if gethui then
+		pcall(function()
+			table.insert(roots, gethui())
+		end)
+	end
+
+	for _, root in roots do
+		pcall(function()
+			for _, child in root:GetChildren() do
+				if child:IsA("ScreenGui") and (child.Name == "Obsidian" or child.Name == "PixelHubObsidian") then
+					child:Destroy()
+				end
+			end
+		end)
+	end
+
+	game:GetService("UserInputService").MouseIconEnabled = true
 end
+unloadPrevious()
 
 local function loadModule(path)
-	local chunk, compileError = loadstring(game:HttpGet(repo .. path))
+	local url = repo .. path .. "?v=" .. tostring(os.time()) .. tostring(math.random(100000, 999999))
+	local chunk, compileError = loadstring(game:HttpGet(url))
 	assert(chunk, string.format("Failed to compile %s: %s", path, tostring(compileError)))
 
 	local module = chunk()
@@ -25,23 +52,34 @@ local function loadModule(path)
 end
 
 local Library = loadModule("library/ui/Library.luau")
-local ThemeManager = loadModule("library/ui/addons/ThemeManager.luau")
-local SaveManager = loadModule("library/ui/addons/SaveManager.luau")
-
 assert(type(Library.CreateWindow) == "function", "Obsidian Library missing CreateWindow")
+if Library.ScreenGui then
+	Library.ScreenGui.Name = "PixelHubObsidian"
+end
 environment.Library = Library
 environment.PixelHubLibrary = Library
-Library:OnUnload(function()
-	for _, toggle in Library.Toggles do
-		if toggle.Value then
-			toggle:SetValue(false)
+
+local function unload()
+	if not Library.Unloaded then
+		for _, toggle in Library.Toggles do
+			if toggle.Value then
+				toggle:SetValue(false)
+			end
 		end
+		Library:Unload()
 	end
 
 	if environment.PixelHubLibrary == Library then
 		environment.PixelHubLibrary = nil
 	end
-end)
+	if environment.PixelHubUnload == unload then
+		environment.PixelHubUnload = nil
+	end
+end
+environment.PixelHubUnload = unload
+
+local ThemeManager = loadModule("library/ui/addons/ThemeManager.luau")
+local SaveManager = loadModule("library/ui/addons/SaveManager.luau")
 
 ThemeManager:SetLibrary(Library)
 ThemeManager:SetFolder("PixelHub")
