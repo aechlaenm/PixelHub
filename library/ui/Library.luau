@@ -1,4 +1,4 @@
--- sorry u get bad code cuz i wasnt paid to make this :p this should work for basic use cases tho
+-- UI library
 local lib = {
 	ui = nil;
 	theme = nil;
@@ -8,7 +8,7 @@ local lib = {
 	methods = {};
 	elements = {};
 	subelements = {};
-	['BROWEN😂😂'] = {};
+	windows = {};
 
 	presets = {
 		def = {
@@ -107,12 +107,12 @@ function lib.elements:butt(...)
 		call = print;
 	}, ... or {})
 
-	Element['im secretly a gay furry femboy but nobodys gonna read this so my secret is safe'] = new("TextButton", { Parent = self.doomdtw_is_so_cute; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal); Size = UDim2.new(1, 0, 0, 16); Text = ''; TextColor3 = Color3.fromRGB(0, 0, 0); TextSize = 14; }) :: TextButton 
-	new("UIGradient", { Parent = Element['im secretly a gay furry femboy but nobodys gonna read this so my secret is safe']; Color =ColorSequence.new{ ColorSequenceKeypoint.new(0, Color3.fromRGB(24, 24, 24)), ColorSequenceKeypoint.new(1, Color3.fromRGB(18, 18, 18)) }; Rotation = 90; }) 
-	new("UIStroke", { Parent = Element['im secretly a gay furry femboy but nobodys gonna read this so my secret is safe']; ApplyStrokeMode = Enum.ApplyStrokeMode.Border; }) 
-	new("TextLabel", { Parent = Element['im secretly a gay furry femboy but nobodys gonna read this so my secret is safe']; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal); Size = UDim2.fromScale(1, 1); Text = Element.text; TextColor3 = Color3.fromRGB(200, 200, 200); TextSize = 14; }) 
+	Element.button = new("TextButton", { Parent = self.doomdtw_is_so_cute; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal); Size = UDim2.new(1, 0, 0, 16); Text = ''; TextColor3 = Color3.fromRGB(0, 0, 0); TextSize = 14; }) :: TextButton
+	new("UIGradient", { Parent = Element.button; Color =ColorSequence.new{ ColorSequenceKeypoint.new(0, Color3.fromRGB(24, 24, 24)), ColorSequenceKeypoint.new(1, Color3.fromRGB(18, 18, 18)) }; Rotation = 90; })
+	new("UIStroke", { Parent = Element.button; ApplyStrokeMode = Enum.ApplyStrokeMode.Border; })
+	new("TextLabel", { Parent = Element.button; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal); Size = UDim2.fromScale(1, 1); Text = Element.text; TextColor3 = Color3.fromRGB(200, 200, 200); TextSize = 14; })
 
-	Element['im secretly a gay furry femboy but nobodys gonna read this so my secret is safe'].Activated:Connect(Element.call)
+	Element.button.Activated:Connect(Element.call)
 
 	return Element
 end
@@ -123,18 +123,18 @@ function lib.elements:baee(...)
 		doomdtw_is_so_cute = nil;
 	}, ... or {})
 
-	local base = new("Frame", { Parent = self.doomdtw_is_so_cute; Name = "base"; AutomaticSize =Enum.AutomaticSize.Y; BackgroundColor3 = Color3.fromRGB(20, 20, 20); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Size = UDim2.new(1, 0, 0, 6); }) :: Frame 
-	local top = new("Frame", { Parent = base; Name = "top"; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; LayoutOrder = -1; Size = UDim2.new(1, 0, 0, 8); }) :: Frame 
-	local LeftC = new("Frame", { Parent = top; Name = "LeftC"; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Position = UDim2.fromOffset(-16, 0); Size = UDim2.new(0, 20, 1, 0); }) :: Frame 
-	local label = new("TextLabel", { Parent = LeftC; Name = "label"; AutomaticSize =Enum.AutomaticSize.X; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal); Size = UDim2.fromScale(0, 1); Text = BRUUUUUUUUUUUUUUUUUUUUUUUUUULOLOLOLOKLOLOKLOOKOKOLJKASDLJKNASJKCNXILJNI.text; TextColor3 = Color3.fromRGB(200, 200, 200); TextSize = 14; }) :: TextLabel 
-	local RightC = new("Frame", { Parent = top; Name = "RightC"; AnchorPoint = Vector2.new(1, 0); BackgroundColor3 = Color3.fromRGB(18, 18, 18); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Position = UDim2.new(1, 22, 0, 0); Size = UDim2.fromScale(0, 1); }) :: Frame 
-	new("UIListLayout", { Parent = LeftC; FillDirection =Enum.FillDirection.Horizontal; Padding =UDim.new(0, 6); SortOrder = Enum.SortOrder.LayoutOrder; }) 
-	new("UIPadding", { Parent = label; PaddingBottom =UDim.new(0, 2); }) 
-	new("UIListLayout", { Parent = RightC; FillDirection =Enum.FillDirection.Horizontal; HorizontalAlignment = Enum.HorizontalAlignment.Right; Padding =UDim.new(0, 24); SortOrder = Enum.SortOrder.LayoutOrder; }) 
+	local base = new("Frame", { Parent = self.doomdtw_is_so_cute; Name = "base"; AutomaticSize =Enum.AutomaticSize.Y; BackgroundColor3 = Color3.fromRGB(20, 20, 20); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Size = UDim2.new(1, 0, 0, 6); }) :: Frame
+	local top = new("Frame", { Parent = base; Name = "top"; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; LayoutOrder = -1; Size = UDim2.new(1, 0, 0, 8); }) :: Frame
+	local LeftC = new("Frame", { Parent = top; Name = "LeftC"; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Position = UDim2.fromOffset(-16, 0); Size = UDim2.new(0, 20, 1, 0); }) :: Frame
+	local label = new("TextLabel", { Parent = LeftC; Name = "label"; AutomaticSize =Enum.AutomaticSize.X; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal); Size = UDim2.fromScale(0, 1); Text = BRUUUUUUUUUUUUUUUUUUUUUUUUUULOLOLOLOKLOLOKLOOKOKOLJKASDLJKNASJKCNXILJNI.text; TextColor3 = Color3.fromRGB(200, 200, 200); TextSize = 14; }) :: TextLabel
+	local RightC = new("Frame", { Parent = top; Name = "RightC"; AnchorPoint = Vector2.new(1, 0); BackgroundColor3 = Color3.fromRGB(18, 18, 18); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Position = UDim2.new(1, 22, 0, 0); Size = UDim2.fromScale(0, 1); }) :: Frame
+	new("UIListLayout", { Parent = LeftC; FillDirection =Enum.FillDirection.Horizontal; Padding =UDim.new(0, 6); SortOrder = Enum.SortOrder.LayoutOrder; })
+	new("UIPadding", { Parent = label; PaddingBottom =UDim.new(0, 2); })
+	new("UIListLayout", { Parent = RightC; FillDirection =Enum.FillDirection.Horizontal; HorizontalAlignment = Enum.HorizontalAlignment.Right; Padding =UDim.new(0, 24); SortOrder = Enum.SortOrder.LayoutOrder; })
 	new("UIListLayout", { Parent = base; Padding =UDim.new(0, 5); SortOrder = Enum.SortOrder.LayoutOrder; });
 
-	local Placeholder = new("Frame", { Parent = LeftC; Name = "Placeholder"; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; LayoutOrder = -1; Size = UDim2.fromScale(1, 1); }) :: Frame 
-	new("UIAspectRatioConstraint", { Parent = Placeholder; }) 
+	local Placeholder = new("Frame", { Parent = LeftC; Name = "Placeholder"; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; LayoutOrder = -1; Size = UDim2.fromScale(1, 1); }) :: Frame
+	new("UIAspectRatioConstraint", { Parent = Placeholder; })
 
 	BRUUUUUUUUUUUUUUUUUUUUUUUUUULOLOLOLOKLOLOKLOOKOKOLJKASDLJKNASJKCNXILJNI.c1 = LeftC;
 	BRUUUUUUUUUUUUUUUUUUUUUUUUUULOLOLOLOKLOLOKLOOKOKOLJKASDLJKNASJKCNXILJNI.c2 = RightC;
@@ -142,7 +142,7 @@ function lib.elements:baee(...)
 	BRUUUUUUUUUUUUUUUUUUUUUUUUUULOLOLOLOKLOLOKLOOKOKOLJKASDLJKNASJKCNXILJNI.tron = Placeholder
 
 	setmetatable(BRUUUUUUUUUUUUUUUUUUUUUUUUUULOLOLOLOKLOLOKLOOKOKOLJKASDLJKNASJKCNXILJNI, lib.subelements)
-	return BRUUUUUUUUUUUUUUUUUUUUUUUUUULOLOLOLOKLOLOKLOOKOKOLJKASDLJKNASJKCNXILJNI	
+	return BRUUUUUUUUUUUUUUUUUUUUUUUUUULOLOLOLOKLOLOKLOOKOKOLJKASDLJKNASJKCNXILJNI
 end
 
 function lib.subelements:addtog(...)
@@ -158,9 +158,9 @@ function lib.subelements:addtog(...)
 		self.tron = nil;
 	end
 
-	local doomdtwlololololololo = new("TextButton", { Parent = self.c1; Name = "doomdtwlololololololo"; LayoutOrder = -999; AutoButtonColor = false; BackgroundColor3 = Color3.fromRGB(18, 18, 18); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal); Size = UDim2.fromScale(1, 1); Text = ""; TextColor3 = Color3.fromRGB(0, 0, 0); TextSize = 14; }) :: TextButton 
-	new("UIAspectRatioConstraint", { Parent = doomdtwlololololololo; }) 
-	new("UIStroke", { Parent = doomdtwlololololololo; ApplyStrokeMode = Enum.ApplyStrokeMode.Border; }) 
+	local doomdtwlololololololo = new("TextButton", { Parent = self.c1; Name = "doomdtwlololololololo"; LayoutOrder = -999; AutoButtonColor = false; BackgroundColor3 = Color3.fromRGB(18, 18, 18); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal); Size = UDim2.fromScale(1, 1); Text = ""; TextColor3 = Color3.fromRGB(0, 0, 0); TextSize = 14; }) :: TextButton
+	new("UIAspectRatioConstraint", { Parent = doomdtwlololololololo; })
+	new("UIStroke", { Parent = doomdtwlololololololo; ApplyStrokeMode = Enum.ApplyStrokeMode.Border; })
 
 	function ElementData:Set(Value : boolean)
 		if ElementData.Children then
@@ -183,7 +183,7 @@ function lib.subelements:addtog(...)
 end
 
 function lib.subelements:addkiki(...)
-	-- BOIIIIIII KIKI DO U LOVE MEEEEEEEEEE😂😂😂😂😂😂😂😂😂🧅🧅
+	-- Keybind input handling
 	local ElementData = lib:overwrite({
 		text = 'browne';
 		mode = "Click";
@@ -195,11 +195,11 @@ function lib.subelements:addkiki(...)
 	}, ... or {})
 	setmetatable(ElementData, lib.subelements)
 
-	local ElementButton = new("TextButton", { Parent = self.c2, AutomaticSize = Enum.AutomaticSize.X, BackgroundColor3 = Color3.fromRGB(18, 18, 18), BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal), Size = UDim2.fromScale(1, 1), Text = "", TextColor3 = Color3.fromRGB(255, 255, 255), TextSize = 14, TextTransparency = 1, }) :: TextButton 
-	local ButtonLabel = new("TextLabel", { Parent = ElementButton, AutomaticSize = Enum.AutomaticSize.X, BackgroundColor3 = Color3.fromRGB(255, 255, 255), BackgroundTransparency = 1, BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal), Size = UDim2.fromScale(0, 1), Text = "...", TextColor3 = Color3.fromRGB(152, 152, 152), TextSize = 14, }) 
-	new("UIStroke", { Parent = ElementButton, ApplyStrokeMode = Enum.ApplyStrokeMode.Border, }) 
-	new("UIStroke", { Parent = ElementButton, ApplyStrokeMode = Enum.ApplyStrokeMode.Border, BorderStrokePosition = Enum.BorderStrokePosition.Inner, Color = Color3.fromRGB(28, 28, 28), }) 
-	new("UIPadding", { Parent = ElementButton, PaddingLeft = UDim.new(0, 5), PaddingRight = UDim.new(0, 5), }) 
+	local ElementButton = new("TextButton", { Parent = self.c2, AutomaticSize = Enum.AutomaticSize.X, BackgroundColor3 = Color3.fromRGB(18, 18, 18), BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal), Size = UDim2.fromScale(1, 1), Text = "", TextColor3 = Color3.fromRGB(255, 255, 255), TextSize = 14, TextTransparency = 1, }) :: TextButton
+	local ButtonLabel = new("TextLabel", { Parent = ElementButton, AutomaticSize = Enum.AutomaticSize.X, BackgroundColor3 = Color3.fromRGB(255, 255, 255), BackgroundTransparency = 1, BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal), Size = UDim2.fromScale(0, 1), Text = "...", TextColor3 = Color3.fromRGB(152, 152, 152), TextSize = 14, })
+	new("UIStroke", { Parent = ElementButton, ApplyStrokeMode = Enum.ApplyStrokeMode.Border, })
+	new("UIStroke", { Parent = ElementButton, ApplyStrokeMode = Enum.ApplyStrokeMode.Border, BorderStrokePosition = Enum.BorderStrokePosition.Inner, Color = Color3.fromRGB(28, 28, 28), })
+	new("UIPadding", { Parent = ElementButton, PaddingLeft = UDim.new(0, 5), PaddingRight = UDim.new(0, 5), })
 
 	local function gsub(e)
 		return tostring(e)
@@ -235,7 +235,7 @@ function lib.subelements:addkiki(...)
 		end
 
 		ButtonLabel.Text = gsub(eeeee)
-		ElementData.val = gsub(eeeee) 
+		ElementData.val = gsub(eeeee)
 	end
 
 	ElementButton.Activated:Connect(function()
@@ -317,50 +317,50 @@ function lib.subelements:addtscolor(...)
 		call = function() end;
 	}, ... or {})
 
-	local ElementButton = new("TextButton", { Parent = self.c2, BackgroundColor3 = Color3.fromRGB(255, 0, 245), BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal), Size = UDim2.new(0, 19, 1, 0), Text = "", TextColor3 = Color3.fromRGB(255, 255, 255), TextSize = 14, TextTransparency = 1, }) :: TextButton 
-	new("UIStroke", { Parent = ElementButton, ApplyStrokeMode = Enum.ApplyStrokeMode.Border, }) 
-	new("UIPadding", { Parent = ElementButton, PaddingLeft = UDim.new(0, 5), PaddingRight = UDim.new(0, 5), }) 
-	new("UIGradient", { Parent = ElementButton, Color = ColorSequence.new{ ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(152, 152, 152)) }, Rotation = 90, }) 
+	local ElementButton = new("TextButton", { Parent = self.c2, BackgroundColor3 = Color3.fromRGB(255, 0, 245), BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal), Size = UDim2.new(0, 19, 1, 0), Text = "", TextColor3 = Color3.fromRGB(255, 255, 255), TextSize = 14, TextTransparency = 1, }) :: TextButton
+	new("UIStroke", { Parent = ElementButton, ApplyStrokeMode = Enum.ApplyStrokeMode.Border, })
+	new("UIPadding", { Parent = ElementButton, PaddingLeft = UDim.new(0, 5), PaddingRight = UDim.new(0, 5), })
+	new("UIGradient", { Parent = ElementButton, Color = ColorSequence.new{ ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(152, 152, 152)) }, Rotation = 90, })
 
 	local PreviewButton = ElementButton
 
-	local ColorPickerFrame = new("Frame", { Parent = lib.ui, Visible = false; Name = "ColorPickerFrame", BackgroundColor3 = Color3.fromRGB(13, 13, 13), BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, Position = UDim2.fromScale(0.7144556641578674, 0.4033333361148834), Size = UDim2.fromOffset(180, 180), }) :: Frame 
-	local ColorMap = new("Frame", { Parent = ColorPickerFrame, Name = "Map", BackgroundColor3 = Color3.fromRGB(255, 255, 255), BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, Size = UDim2.fromOffset(150, 150), }) :: Frame 
-	local SatMap = new("Frame", { Parent = ColorMap, Name = "SatMap", BackgroundColor3 = Color3.fromRGB(255, 255, 255), BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, Size = UDim2.fromScale(1, 1), }) :: Frame 
-	local ValMap = new("Frame", { Parent = ColorMap, Name = "ValMap", BackgroundColor3 = Color3.fromRGB(0, 0, 0), BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, Size = UDim2.fromScale(1, 1), }) :: Frame 
-	local ColorMarker = new("Frame", { Parent = ColorMap, Name = "MapMarker", BackgroundColor3 = Color3.fromRGB(255, 255, 255), BackgroundTransparency = 1, BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, Size = UDim2.fromOffset(4, 4), }) :: Frame 
-	local HueBar = new("Frame", { Parent = ColorPickerFrame, Name = "Hue", AnchorPoint = Vector2.new(1, 0), BackgroundColor3 = Color3.fromRGB(255, 255, 255), BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, Position = UDim2.fromScale(1, 0), Size = UDim2.new(1, -155, 1, -18), }) :: Frame 
-	local HueMarker = new("Frame", { Parent = HueBar, Name = "HueMarker", AnchorPoint = Vector2.new(1, 0), BackgroundColor3 = Color3.fromRGB(255, 255, 255), BackgroundTransparency = 1, BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, Position = UDim2.fromScale(1, 0), Size = UDim2.new(1, 0, 0, 7), }) :: Frame 
-	local AlphaBar = new("Frame", { Parent = ColorPickerFrame, Name = "Alp", AnchorPoint = Vector2.new(0, 1), BackgroundColor3 = Color3.fromRGB(18, 18, 18), BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, -18, 1, -155), }) :: Frame 
-	local AlphaFill = new("Frame", { Parent = AlphaBar, Name = "SatMap", BackgroundColor3 = Color3.fromRGB(255, 0, 4), BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, Size = UDim2.fromScale(1, 1), }) :: Frame 
-	local AlphaMarker = new("Frame", { Parent = AlphaBar, Name = "AlpMarker", ZIndex = 999; AnchorPoint = Vector2.new(1, 0), BackgroundColor3 = Color3.fromRGB(255, 255, 255), BackgroundTransparency = 1, BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, Position = UDim2.fromScale(1, 0), Size = UDim2.new(0, 7, 1, 0), }) :: Frame 
-	local CopyButton = new("TextButton", { Parent = ColorPickerFrame, AnchorPoint = Vector2.new(1, 1), BackgroundColor3 = Color3.fromRGB(18, 18, 18), BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal), Position = UDim2.fromScale(1, 1), Size = UDim2.fromOffset(13, 13), Text = "C", TextColor3 = Color3.fromRGB(200, 200, 200), TextSize = 14, }) :: TextButton 
-	local ValueGradient=new("UIGradient", { Parent = ValMap, Color = ColorSequence.new{ ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0)) }, Rotation = 90, Transparency = NumberSequence.new{ NumberSequenceKeypoint.new(0, 1), NumberSequenceKeypoint.new(1, 0) }, }) 
-	local SaturationGradient = new("UIGradient", { Parent = SatMap, Transparency = NumberSequence.new{ NumberSequenceKeypoint.new(0, 1), NumberSequenceKeypoint.new(1, 0) }, }) 
-	local HueGradient =	new("UIGradient", { Parent = HueBar, Color = ColorSequence.new{ ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 0, 0)), ColorSequenceKeypoint.new(0.167, Color3.fromRGB(255, 255, 0)), ColorSequenceKeypoint.new(0.333, Color3.fromRGB(0, 255, 0)), ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0, 255, 255)), ColorSequenceKeypoint.new(0.67, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(0.833, Color3.fromRGB(255, 0, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 0, 0)) }, Rotation = 90, }) 
-	new("UIStroke", { Parent = ColorPickerFrame, BorderStrokePosition = Enum.BorderStrokePosition.Inner, }) 
-	new("UIPadding", { Parent = ColorPickerFrame, PaddingBottom = UDim.new(0, 6), PaddingLeft = UDim.new(0, 6), PaddingRight = UDim.new(0, 6), PaddingTop = UDim.new(0, 6), }) 
-	new("UIStroke", { Parent = ColorMap, ApplyStrokeMode = Enum.ApplyStrokeMode.Border, }) 
-	new("UIStroke", { Parent = ColorMarker, BorderStrokePosition = Enum.BorderStrokePosition.Center, LineJoinMode = Enum.LineJoinMode.Miter, Thickness = 1.25, }) 
-	new("UIStroke", { Parent = HueBar, ApplyStrokeMode = Enum.ApplyStrokeMode.Border, }) 
-	new("UIStroke", { Parent = HueMarker, LineJoinMode = Enum.LineJoinMode.Miter, Thickness = 2, }) 
-	new("UIStroke", { Parent = HueMarker, BorderStrokePosition = Enum.BorderStrokePosition.Inner, Color = Color3.fromRGB(255, 255, 255), LineJoinMode = Enum.LineJoinMode.Miter, Thickness = 1.9, }) 
-	new("UIStroke", { Parent = AlphaBar, ApplyStrokeMode = Enum.ApplyStrokeMode.Border, }) 
-	new("UIGradient", { Parent = AlphaFill, Transparency = NumberSequence.new{ NumberSequenceKeypoint.new(0, 1), NumberSequenceKeypoint.new(1, 0) }, }) 
-	new("UIStroke", { Parent = AlphaMarker, LineJoinMode = Enum.LineJoinMode.Miter, Thickness = 2, }) 
-	new("UIStroke", { Parent = AlphaMarker, BorderStrokePosition = Enum.BorderStrokePosition.Inner, Color = Color3.fromRGB(255, 255, 255), LineJoinMode = Enum.LineJoinMode.Miter, Thickness = 1.9, }) 
-	new("UIStroke", { Parent = CopyButton, ApplyStrokeMode = Enum.ApplyStrokeMode.Border, }) 
+	local ColorPickerFrame = new("Frame", { Parent = lib.ui, Visible = false; Name = "ColorPickerFrame", BackgroundColor3 = Color3.fromRGB(13, 13, 13), BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, Position = UDim2.fromScale(0.7144556641578674, 0.4033333361148834), Size = UDim2.fromOffset(180, 180), }) :: Frame
+	local ColorMap = new("Frame", { Parent = ColorPickerFrame, Name = "Map", BackgroundColor3 = Color3.fromRGB(255, 255, 255), BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, Size = UDim2.fromOffset(150, 150), }) :: Frame
+	local SatMap = new("Frame", { Parent = ColorMap, Name = "SatMap", BackgroundColor3 = Color3.fromRGB(255, 255, 255), BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, Size = UDim2.fromScale(1, 1), }) :: Frame
+	local ValMap = new("Frame", { Parent = ColorMap, Name = "ValMap", BackgroundColor3 = Color3.fromRGB(0, 0, 0), BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, Size = UDim2.fromScale(1, 1), }) :: Frame
+	local ColorMarker = new("Frame", { Parent = ColorMap, Name = "MapMarker", BackgroundColor3 = Color3.fromRGB(255, 255, 255), BackgroundTransparency = 1, BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, Size = UDim2.fromOffset(4, 4), }) :: Frame
+	local HueBar = new("Frame", { Parent = ColorPickerFrame, Name = "Hue", AnchorPoint = Vector2.new(1, 0), BackgroundColor3 = Color3.fromRGB(255, 255, 255), BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, Position = UDim2.fromScale(1, 0), Size = UDim2.new(1, -155, 1, -18), }) :: Frame
+	local HueMarker = new("Frame", { Parent = HueBar, Name = "HueMarker", AnchorPoint = Vector2.new(1, 0), BackgroundColor3 = Color3.fromRGB(255, 255, 255), BackgroundTransparency = 1, BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, Position = UDim2.fromScale(1, 0), Size = UDim2.new(1, 0, 0, 7), }) :: Frame
+	local AlphaBar = new("Frame", { Parent = ColorPickerFrame, Name = "Alp", AnchorPoint = Vector2.new(0, 1), BackgroundColor3 = Color3.fromRGB(18, 18, 18), BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, -18, 1, -155), }) :: Frame
+	local AlphaFill = new("Frame", { Parent = AlphaBar, Name = "SatMap", BackgroundColor3 = Color3.fromRGB(255, 0, 4), BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, Size = UDim2.fromScale(1, 1), }) :: Frame
+	local AlphaMarker = new("Frame", { Parent = AlphaBar, Name = "AlpMarker", ZIndex = 999; AnchorPoint = Vector2.new(1, 0), BackgroundColor3 = Color3.fromRGB(255, 255, 255), BackgroundTransparency = 1, BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, Position = UDim2.fromScale(1, 0), Size = UDim2.new(0, 7, 1, 0), }) :: Frame
+	local CopyButton = new("TextButton", { Parent = ColorPickerFrame, AnchorPoint = Vector2.new(1, 1), BackgroundColor3 = Color3.fromRGB(18, 18, 18), BorderColor3 = Color3.fromRGB(0, 0, 0), BorderSizePixel = 0, FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal), Position = UDim2.fromScale(1, 1), Size = UDim2.fromOffset(13, 13), Text = "C", TextColor3 = Color3.fromRGB(200, 200, 200), TextSize = 14, }) :: TextButton
+	local ValueGradient=new("UIGradient", { Parent = ValMap, Color = ColorSequence.new{ ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0)) }, Rotation = 90, Transparency = NumberSequence.new{ NumberSequenceKeypoint.new(0, 1), NumberSequenceKeypoint.new(1, 0) }, })
+	local SaturationGradient = new("UIGradient", { Parent = SatMap, Transparency = NumberSequence.new{ NumberSequenceKeypoint.new(0, 1), NumberSequenceKeypoint.new(1, 0) }, })
+	local HueGradient =	new("UIGradient", { Parent = HueBar, Color = ColorSequence.new{ ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 0, 0)), ColorSequenceKeypoint.new(0.167, Color3.fromRGB(255, 255, 0)), ColorSequenceKeypoint.new(0.333, Color3.fromRGB(0, 255, 0)), ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0, 255, 255)), ColorSequenceKeypoint.new(0.67, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(0.833, Color3.fromRGB(255, 0, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 0, 0)) }, Rotation = 90, })
+	new("UIStroke", { Parent = ColorPickerFrame, BorderStrokePosition = Enum.BorderStrokePosition.Inner, })
+	new("UIPadding", { Parent = ColorPickerFrame, PaddingBottom = UDim.new(0, 6), PaddingLeft = UDim.new(0, 6), PaddingRight = UDim.new(0, 6), PaddingTop = UDim.new(0, 6), })
+	new("UIStroke", { Parent = ColorMap, ApplyStrokeMode = Enum.ApplyStrokeMode.Border, })
+	new("UIStroke", { Parent = ColorMarker, BorderStrokePosition = Enum.BorderStrokePosition.Center, LineJoinMode = Enum.LineJoinMode.Miter, Thickness = 1.25, })
+	new("UIStroke", { Parent = HueBar, ApplyStrokeMode = Enum.ApplyStrokeMode.Border, })
+	new("UIStroke", { Parent = HueMarker, LineJoinMode = Enum.LineJoinMode.Miter, Thickness = 2, })
+	new("UIStroke", { Parent = HueMarker, BorderStrokePosition = Enum.BorderStrokePosition.Inner, Color = Color3.fromRGB(255, 255, 255), LineJoinMode = Enum.LineJoinMode.Miter, Thickness = 1.9, })
+	new("UIStroke", { Parent = AlphaBar, ApplyStrokeMode = Enum.ApplyStrokeMode.Border, })
+	new("UIGradient", { Parent = AlphaFill, Transparency = NumberSequence.new{ NumberSequenceKeypoint.new(0, 1), NumberSequenceKeypoint.new(1, 0) }, })
+	new("UIStroke", { Parent = AlphaMarker, LineJoinMode = Enum.LineJoinMode.Miter, Thickness = 2, })
+	new("UIStroke", { Parent = AlphaMarker, BorderStrokePosition = Enum.BorderStrokePosition.Inner, Color = Color3.fromRGB(255, 255, 255), LineJoinMode = Enum.LineJoinMode.Miter, Thickness = 1.9, })
+	new("UIStroke", { Parent = CopyButton, ApplyStrokeMode = Enum.ApplyStrokeMode.Border, })
 	new("UIPadding", { Parent = CopyButton, PaddingBottom = UDim.new(0, 1), PaddingRight = UDim.new(0, 1), })
 
 	ColorPickerFrame.MouseEnter:Connect(function()
-		for _, w in next, lib['BROWEN😂😂'] do
+		for _, w in next, lib.windows do
 			w.i.Draggable = false;
 			print(w.Name)
 		end
 	end)
 
 	ColorPickerFrame.MouseLeave:Connect(function()
-		for _, w in next, lib['BROWEN😂😂'] do
+		for _, w in next, lib.windows do
 			w.i.Draggable = true;
 			print('made undrag')
 		end
@@ -372,17 +372,17 @@ function lib.subelements:addtscolor(...)
 	table.insert(lib['ahahahagvafdadadf'], CopyButton)
 
 	CopyButton.Activated:Connect(function()
-		if lib['Pull up with a Tech, bitch I never lack, ooh / Hunnid on my neck, hunnid on the dash, ooh / They all hit my line for a follow back, ooh / Skrrt skrrt skrrt skrrt in the Cadillac, ooh / Puffing on the green, bitch I feel like yoda'] ~= nil then
-			ElementData:Set(lib['Pull up with a Tech, bitch I never lack, ooh / Hunnid on my neck, hunnid on the dash, ooh / They all hit my line for a follow back, ooh / Skrrt skrrt skrrt skrrt in the Cadillac, ooh / Puffing on the green, bitch I feel like yoda'].v, lib['Pull up with a Tech, bitch I never lack, ooh / Hunnid on my neck, hunnid on the dash, ooh / They all hit my line for a follow back, ooh / Skrrt skrrt skrrt skrrt in the Cadillac, ooh / Puffing on the green, bitch I feel like yoda'].a)
+		if lib.copiedColor ~= nil then
+			ElementData:Set(lib.copiedColor.v, lib.copiedColor.a)
 
 			for _, ioioioi in lib['ahahahagvafdadadf'] do
 				ioioioi.Text = 'C'
-				lib['Pull up with a Tech, bitch I never lack, ooh / Hunnid on my neck, hunnid on the dash, ooh / They all hit my line for a follow back, ooh / Skrrt skrrt skrrt skrrt in the Cadillac, ooh / Puffing on the green, bitch I feel like yoda'] = nil
+				lib.copiedColor = nil
 			end
 
 			return
 		end
-		lib['Pull up with a Tech, bitch I never lack, ooh / Hunnid on my neck, hunnid on the dash, ooh / They all hit my line for a follow back, ooh / Skrrt skrrt skrrt skrrt in the Cadillac, ooh / Puffing on the green, bitch I feel like yoda'] = {
+		lib.copiedColor = {
 			v = ElementData.val;
 			a = ElementData.alpha;
 		};
@@ -452,7 +452,7 @@ function lib.subelements:addtscolor(...)
 		local Number = Split[1]
 		local Decimal = Split[2]
 
-		return string.gsub('%s, %s, %s, %s', 
+		return string.gsub('%s, %s, %s, %s',
 			math.floor(ElementData.val.R*255),
 			math.floor(ElementData.val.G*255),
 			math.floor(ElementData.val.B*255),
@@ -506,9 +506,9 @@ function lib.subelements:addtscolor(...)
 		game:GetService('TweenService'):Create(
 			ColorMarker,
 			TweenInfo.new(.2,Enum.EasingStyle.Quart,Enum.EasingDirection.Out) ,
-			{ 
-				Position = UDim2.fromScale(RelativeMouseX, RelativeMouseY), 
-				AnchorPoint = Vector2.new(RelativeMouseX, RelativeMouseY) 
+			{
+				Position = UDim2.fromScale(RelativeMouseX, RelativeMouseY),
+				AnchorPoint = Vector2.new(RelativeMouseX, RelativeMouseY)
 			}
 		):Play();
 
@@ -546,7 +546,7 @@ function lib.subelements:addtscolor(...)
 		local RelativeMouseY = math.clamp(((Mouse.Y - AbsPos.Y) / AbsSize.Y), 0, 1)
 
 		game:GetService('TweenService'):Create(
-			HueMarker, 
+			HueMarker,
 			TweenInfo.new(.2,Enum.EasingStyle.Quart,Enum.EasingDirection.Out),
 			{ Position = UDim2.fromScale(0.5, RelativeMouseY), AnchorPoint = Vector2.new(0.5, RelativeMouseY) }
 		):Play();
@@ -686,9 +686,9 @@ function lib.elements:newslider(...)
 
 	local base = self:baee(...)
 
-	local hitbox = new("TextButton", { Parent = base.c3; Name = "Sliderbutton"; TextTransparency = 1; AutoButtonColor = false; BackgroundColor3 = Color3.fromRGB(18, 18, 18); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal); Size = UDim2.new(1, 0, 0, 6); TextColor3 = Color3.fromRGB(0, 0, 0); TextSize = 14; }) :: TextButton 
-	local fill = new("Frame", { Parent = hitbox; Name = "Fill"; BackgroundColor3 = Color3.fromRGB(255, 0, 245); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Size = UDim2.fromScale(0.5, 1); }) 
-	new("UIStroke", { Parent = hitbox; ApplyStrokeMode = Enum.ApplyStrokeMode.Border }) 
+	local hitbox = new("TextButton", { Parent = base.c3; Name = "Sliderbutton"; TextTransparency = 1; AutoButtonColor = false; BackgroundColor3 = Color3.fromRGB(18, 18, 18); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal); Size = UDim2.new(1, 0, 0, 6); TextColor3 = Color3.fromRGB(0, 0, 0); TextSize = 14; }) :: TextButton
+	local fill = new("Frame", { Parent = hitbox; Name = "Fill"; BackgroundColor3 = Color3.fromRGB(255, 0, 245); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Size = UDim2.fromScale(0.5, 1); })
+	new("UIStroke", { Parent = hitbox; ApplyStrokeMode = Enum.ApplyStrokeMode.Border })
 
 	local mouse = game.Players.LocalPlayer:GetMouse();
 	local down = nil;
@@ -739,24 +739,6 @@ function lib.elements:newdropdown(...)
 		multi = true;
 		val = {};
 		size = nil;
-		--list =  {
-		--	'Fuck';
-		--	'Joseph';
-		--	'Davinci';
-		--	'For';
-		--	'Scamming';
-		--	'Me';
-		--	'Out';
-		--	'Of';
-		--	'$150';
-		--	'For';
-		--	'A';
-		--	'Dead';
-		--	'Artists';
-		--	'Song';
-		--	'Go Harass Him at @josephdavinci on ig';
-		--	'and tell him to send me popstar 2.wav';
-		--};
 		list = {};
 		call = print;
 	}, ... or {})
@@ -764,28 +746,28 @@ function lib.elements:newdropdown(...)
 	local e = self:baee(data);
 	local d=...
 
-	local dropdown = new("Frame", { Parent = e.c3; Name = "dropdown"; AutomaticSize =Enum.AutomaticSize.Y; BackgroundColor3 = Color3.fromRGB(20, 20, 20); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Size = UDim2.new(1, 0, 0, 6); }) :: Frame 
-	local hitbox = new("TextButton", { Parent = dropdown; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal); Size = UDim2.new(1, 0, 0, 16); Text = ""; TextColor3 = Color3.fromRGB(200, 200, 200); TextSize = 14; }) :: TextButton 
-	local hitboxlabel = new("TextLabel", { Parent = hitbox; AutomaticSize =Enum.AutomaticSize.X; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal); Size = UDim2.fromScale(0, 1); Text = "dropdown"; TextColor3 = Color3.fromRGB(200, 200, 200); TextSize = 14; }) :: TextLabel 
-	local optionlist = new("Frame", { Parent = lib.ui; Name = "ListFrame"; Visible = false; AutomaticSize =Enum.AutomaticSize.Y; BackgroundColor3 = Color3.fromRGB(18, 18, 18); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Size = UDim2.fromOffset(161, 0); }) :: Frame 
-	local optionbutton = new("TextButton", { Parent = optionlist; Visible = false; TextXAlignment = Enum.TextXAlignment.Left, Name = "optionbutton"; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal); Size = UDim2.new(1, 0, 0, 16); Text = ""; TextColor3 = Color3.fromRGB(0, 0, 0); TextSize = 14; }) :: TextButton 
-	local dropdownicon = new("ImageLabel", { Parent = hitbox; AnchorPoint = Vector2.new(1, 0.5); BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Image = "rbxassetid://86464972789532"; ImageColor3 = Color3.fromRGB(152, 152, 152); Position = UDim2.fromScale(1, 0.5); Size = UDim2.fromOffset(6, 6); }) 
-	new("UIListLayout", { Parent = dropdown; Padding =UDim.new(0, 5); SortOrder = Enum.SortOrder.LayoutOrder; }) 
-	new("UIListLayout", { Parent = optionlist; Padding =UDim.new(0, 1); SortOrder = Enum.SortOrder.LayoutOrder; }) 
-	new("UIGradient", { Parent = hitbox; Color =ColorSequence.new{ ColorSequenceKeypoint.new(0, Color3.fromRGB(24, 24, 24)), ColorSequenceKeypoint.new(1, Color3.fromRGB(18, 18, 18)) }; Rotation = 90; }) 
-	new("UIPadding", { Parent = hitbox; PaddingLeft =UDim.new(0, 4); PaddingRight =UDim.new(0, 4); }) 
-	new("UIPadding", { Parent = optionbutton; PaddingLeft =UDim.new(0, 4); PaddingRight =UDim.new(0, 4); }) 
-	new("UIStroke", { Parent = hitbox; ApplyStrokeMode = Enum.ApplyStrokeMode.Border; }) 
-	new("UIStroke", { Parent = optionbutton; ApplyStrokeMode = Enum.ApplyStrokeMode.Border; Enabled = false; }) 
-	new("UIStroke", { Parent = optionlist; ApplyStrokeMode = Enum.ApplyStrokeMode.Border; }) 
+	local dropdown = new("Frame", { Parent = e.c3; Name = "dropdown"; AutomaticSize =Enum.AutomaticSize.Y; BackgroundColor3 = Color3.fromRGB(20, 20, 20); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Size = UDim2.new(1, 0, 0, 6); }) :: Frame
+	local hitbox = new("TextButton", { Parent = dropdown; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal); Size = UDim2.new(1, 0, 0, 16); Text = ""; TextColor3 = Color3.fromRGB(200, 200, 200); TextSize = 14; }) :: TextButton
+	local hitboxlabel = new("TextLabel", { Parent = hitbox; AutomaticSize =Enum.AutomaticSize.X; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal); Size = UDim2.fromScale(0, 1); Text = "dropdown"; TextColor3 = Color3.fromRGB(200, 200, 200); TextSize = 14; }) :: TextLabel
+	local optionlist = new("Frame", { Parent = lib.ui; Name = "ListFrame"; Visible = false; AutomaticSize =Enum.AutomaticSize.Y; BackgroundColor3 = Color3.fromRGB(18, 18, 18); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Size = UDim2.fromOffset(161, 0); }) :: Frame
+	local optionbutton = new("TextButton", { Parent = optionlist; Visible = false; TextXAlignment = Enum.TextXAlignment.Left, Name = "optionbutton"; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal); Size = UDim2.new(1, 0, 0, 16); Text = ""; TextColor3 = Color3.fromRGB(0, 0, 0); TextSize = 14; }) :: TextButton
+	local dropdownicon = new("ImageLabel", { Parent = hitbox; AnchorPoint = Vector2.new(1, 0.5); BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Image = "rbxassetid://86464972789532"; ImageColor3 = Color3.fromRGB(152, 152, 152); Position = UDim2.fromScale(1, 0.5); Size = UDim2.fromOffset(6, 6); })
+	new("UIListLayout", { Parent = dropdown; Padding =UDim.new(0, 5); SortOrder = Enum.SortOrder.LayoutOrder; })
+	new("UIListLayout", { Parent = optionlist; Padding =UDim.new(0, 1); SortOrder = Enum.SortOrder.LayoutOrder; })
+	new("UIGradient", { Parent = hitbox; Color =ColorSequence.new{ ColorSequenceKeypoint.new(0, Color3.fromRGB(24, 24, 24)), ColorSequenceKeypoint.new(1, Color3.fromRGB(18, 18, 18)) }; Rotation = 90; })
+	new("UIPadding", { Parent = hitbox; PaddingLeft =UDim.new(0, 4); PaddingRight =UDim.new(0, 4); })
+	new("UIPadding", { Parent = optionbutton; PaddingLeft =UDim.new(0, 4); PaddingRight =UDim.new(0, 4); })
+	new("UIStroke", { Parent = hitbox; ApplyStrokeMode = Enum.ApplyStrokeMode.Border; })
+	new("UIStroke", { Parent = optionbutton; ApplyStrokeMode = Enum.ApplyStrokeMode.Border; Enabled = false; })
+	new("UIStroke", { Parent = optionlist; ApplyStrokeMode = Enum.ApplyStrokeMode.Border; })
 
-	data['https://www.youtube.com/watch?v=8TNMsUnIXAE'] = function()
+	local function updateOptionListPosition()
 		optionlist.Size = UDim2.fromOffset(hitbox.AbsoluteSize.X, 0)
 		optionlist.Position = UDim2.fromOffset(hitbox.AbsolutePosition.X, (hitbox.AbsolutePosition.Y + hitbox.AbsoluteSize.Y))
 	end
 
-	hitbox:GetPropertyChangedSignal('AbsoluteSize'):Connect(data['https://www.youtube.com/watch?v=8TNMsUnIXAE']);
-	hitbox:GetPropertyChangedSignal('AbsolutePosition'):Connect(data['https://www.youtube.com/watch?v=8TNMsUnIXAE']);
+	hitbox:GetPropertyChangedSignal('AbsoluteSize'):Connect(updateOptionListPosition);
+	hitbox:GetPropertyChangedSignal('AbsolutePosition'):Connect(updateOptionListPosition);
 
 	optionlist.Size = UDim2.fromOffset(data.size, 0);
 
@@ -851,25 +833,25 @@ function lib:win(name, ...)
 		active = true;
 	}, ... or {})
 
-	local windowframe = new("Frame", { Parent = lib.ui; Draggable = true; Selectable = true; Active = true; Name = "WindowFrame"; BackgroundColor3 = Color3.fromRGB(13, 13, 13); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Position = UDim2.fromScale(0.33789411187171936, 0.28999999165534973); Size = UDim2.fromOffset(621, 400); }) :: Frame 
-	local topbar = new("Frame", { Parent = windowframe; Name = "Topbar"; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Position = UDim2.fromOffset(-10, 0); Size = UDim2.new(1, 20, 0, 30); }) :: Frame 
-	local titlelabel = new("TextLabel", { Parent = topbar; Name = "TitleLabel"; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal); Size = UDim2.fromScale(1, 1); Text = window.title; TextColor3 = Color3.fromRGB(255, 255, 255); TextSize = 14; TextXAlignment = Enum.TextXAlignment.Left; }) :: TextLabel 
-	local content = new("Frame", { Parent = windowframe; Name = "Content"; AnchorPoint = Vector2.new(0, 1); BackgroundColor3 = Color3.fromRGB(18, 18, 18); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Position = UDim2.fromScale(0, 1); Size = UDim2.new(1, 0, 1, -30); }) :: Frame 
-	local sidebar = new("Frame", { Parent = content; Name = "Sidebar"; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Size = UDim2.new(0, 130, 1, 0); }) :: Frame 
-	local logomask = new("Frame", { Parent = sidebar; Name = "LogoMask"; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; ClipsDescendants = true; Size = UDim2.new(1, 0, 0, 80); }) :: Frame 
-	local logolabel = new("ImageLabel", { Parent = logomask; Name = "LogoLabel"; AnchorPoint = Vector2.new(0.5, 0.5); BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Image = window.logo; Position = UDim2.fromScale(0.5, 0.5); Size = UDim2.fromScale(1.5, 1.5); }) :: ImageLabel 
-	local tabbuttons = new("Frame", { Parent = sidebar; Name = "TabButtons"; AnchorPoint = Vector2.new(0, 1); BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Position = UDim2.fromScale(0, 1); Size = UDim2.new(1, 0, 1, -86); }) :: Frame 
-	local tabcontainer = new("Frame", { Parent = content; Name = "TabContainer"; AnchorPoint = Vector2.new(1, 0); BackgroundColor3 = Color3.fromRGB(18, 18, 18); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Position = UDim2.fromScale(1, 0); Size = UDim2.new(1, -136, 1, 0); }) :: Frame 
-	new("UIGradient", { Parent = topbar; Color =ColorSequence.new{ ColorSequenceKeypoint.new(0, Color3.fromRGB(26, 26, 26)), ColorSequenceKeypoint.new(1, Color3.fromRGB(13, 13, 13)) }; Rotation = 90; }) 
-	new("UIPadding", { Parent = titlelabel; PaddingLeft =UDim.new(0, 10); }) 
-	new("UIStroke", { Parent = windowframe; BorderStrokePosition = Enum.BorderStrokePosition.Inner; }) 
-	new("UIStroke", { Parent = content; }) 
-	new("UIAspectRatioConstraint", { Parent = logolabel; }) 
-	new("UIPadding", { Parent = sidebar; }) 
-	new("UIListLayout", { Parent = tabbuttons; Padding =UDim.new(0, 3); SortOrder = Enum.SortOrder.LayoutOrder; }) 
-	new("UIPadding", { Parent = content; PaddingBottom =UDim.new(0, 6); PaddingLeft =UDim.new(0, 6); PaddingRight =UDim.new(0, 6); PaddingTop =UDim.new(0, 6); }) 
-	new("UIStroke", { Parent = tabcontainer; }) 
-	new("UIPadding", { Parent = windowframe; PaddingBottom =UDim.new(0, 10); PaddingLeft =UDim.new(0, 10); PaddingRight =UDim.new(0, 10); }) 
+	local windowframe = new("Frame", { Parent = lib.ui; Draggable = true; Selectable = true; Active = true; Name = "WindowFrame"; BackgroundColor3 = Color3.fromRGB(13, 13, 13); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Position = UDim2.fromScale(0.33789411187171936, 0.28999999165534973); Size = UDim2.fromOffset(621, 400); }) :: Frame
+	local topbar = new("Frame", { Parent = windowframe; Name = "Topbar"; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Position = UDim2.fromOffset(-10, 0); Size = UDim2.new(1, 20, 0, 30); }) :: Frame
+	local titlelabel = new("TextLabel", { Parent = topbar; Name = "TitleLabel"; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal); Size = UDim2.fromScale(1, 1); Text = window.title; TextColor3 = Color3.fromRGB(255, 255, 255); TextSize = 14; TextXAlignment = Enum.TextXAlignment.Left; }) :: TextLabel
+	local content = new("Frame", { Parent = windowframe; Name = "Content"; AnchorPoint = Vector2.new(0, 1); BackgroundColor3 = Color3.fromRGB(18, 18, 18); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Position = UDim2.fromScale(0, 1); Size = UDim2.new(1, 0, 1, -30); }) :: Frame
+	local sidebar = new("Frame", { Parent = content; Name = "Sidebar"; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Size = UDim2.new(0, 130, 1, 0); }) :: Frame
+	local logomask = new("Frame", { Parent = sidebar; Name = "LogoMask"; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; ClipsDescendants = true; Size = UDim2.new(1, 0, 0, 80); }) :: Frame
+	local logolabel = new("ImageLabel", { Parent = logomask; Name = "LogoLabel"; AnchorPoint = Vector2.new(0.5, 0.5); BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Image = window.logo; Position = UDim2.fromScale(0.5, 0.5); Size = UDim2.fromScale(1.5, 1.5); }) :: ImageLabel
+	local tabbuttons = new("Frame", { Parent = sidebar; Name = "TabButtons"; AnchorPoint = Vector2.new(0, 1); BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Position = UDim2.fromScale(0, 1); Size = UDim2.new(1, 0, 1, -86); }) :: Frame
+	local tabcontainer = new("Frame", { Parent = content; Name = "TabContainer"; AnchorPoint = Vector2.new(1, 0); BackgroundColor3 = Color3.fromRGB(18, 18, 18); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Position = UDim2.fromScale(1, 0); Size = UDim2.new(1, -136, 1, 0); }) :: Frame
+	new("UIGradient", { Parent = topbar; Color =ColorSequence.new{ ColorSequenceKeypoint.new(0, Color3.fromRGB(26, 26, 26)), ColorSequenceKeypoint.new(1, Color3.fromRGB(13, 13, 13)) }; Rotation = 90; })
+	new("UIPadding", { Parent = titlelabel; PaddingLeft =UDim.new(0, 10); })
+	new("UIStroke", { Parent = windowframe; BorderStrokePosition = Enum.BorderStrokePosition.Inner; })
+	new("UIStroke", { Parent = content; })
+	new("UIAspectRatioConstraint", { Parent = logolabel; })
+	new("UIPadding", { Parent = sidebar; })
+	new("UIListLayout", { Parent = tabbuttons; Padding =UDim.new(0, 3); SortOrder = Enum.SortOrder.LayoutOrder; })
+	new("UIPadding", { Parent = content; PaddingBottom =UDim.new(0, 6); PaddingLeft =UDim.new(0, 6); PaddingRight =UDim.new(0, 6); PaddingTop =UDim.new(0, 6); })
+	new("UIStroke", { Parent = tabcontainer; })
+	new("UIPadding", { Parent = windowframe; PaddingBottom =UDim.new(0, 10); PaddingLeft =UDim.new(0, 10); PaddingRight =UDim.new(0, 10); })
 
 	function window:toggle(b : boolean)
 		if (b == nil or typeof(b) ~= 'boolean') then b = not window.active end;
@@ -893,27 +875,27 @@ function lib:win(name, ...)
 	end
 
 	function window:tab(name, ...)
-		local tab = lib:overwrite({ 
+		local tab = lib:overwrite({
 			name = name or 'tab';
 			groups = {};
 			links = {};
 			active = false;
 		}, ... or {});
 
-		local tabframe = new("Frame", { Parent = tabcontainer; Name = "tabframe"; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Size = UDim2.fromScale(1, 1); }) :: Frame 
-		local leftc = new("Frame", { Parent = tabframe; Name = "leftc"; BackgroundColor3 = Color3.fromRGB(18, 18, 18); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Size = UDim2.fromOffset(100, 100); }) :: Frame 
-		local rightc = new("Frame", { Parent = tabframe; Name = "rightc"; BackgroundColor3 = Color3.fromRGB(18, 18, 18); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Size = UDim2.fromOffset(100, 100); }) :: Frame 
-		new("UIListLayout", { Parent = tabframe; FillDirection =Enum.FillDirection.Horizontal; HorizontalFlex = Enum.UIFlexAlignment.Fill; Padding =UDim.new(0, 9); SortOrder = Enum.SortOrder.LayoutOrder; VerticalFlex = Enum.UIFlexAlignment.Fill; }) 
-		new("UIPadding", { Parent = tabframe; PaddingBottom =UDim.new(0, 5); PaddingLeft =UDim.new(0, 5); PaddingRight =UDim.new(0, 5); PaddingTop =UDim.new(0, 5); }) 
-		new("UIListLayout", { Parent = leftc; HorizontalFlex = Enum.UIFlexAlignment.Fill; Padding =UDim.new(0, 10); SortOrder = Enum.SortOrder.LayoutOrder; VerticalFlex = Enum.UIFlexAlignment.Fill; }) 
-		new("UIListLayout", { Parent = rightc; HorizontalFlex = Enum.UIFlexAlignment.Fill; Padding =UDim.new(0, 10); SortOrder = Enum.SortOrder.LayoutOrder; VerticalFlex = Enum.UIFlexAlignment.Fill; }) 
+		local tabframe = new("Frame", { Parent = tabcontainer; Name = "tabframe"; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Size = UDim2.fromScale(1, 1); }) :: Frame
+		local leftc = new("Frame", { Parent = tabframe; Name = "leftc"; BackgroundColor3 = Color3.fromRGB(18, 18, 18); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Size = UDim2.fromOffset(100, 100); }) :: Frame
+		local rightc = new("Frame", { Parent = tabframe; Name = "rightc"; BackgroundColor3 = Color3.fromRGB(18, 18, 18); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Size = UDim2.fromOffset(100, 100); }) :: Frame
+		new("UIListLayout", { Parent = tabframe; FillDirection =Enum.FillDirection.Horizontal; HorizontalFlex = Enum.UIFlexAlignment.Fill; Padding =UDim.new(0, 9); SortOrder = Enum.SortOrder.LayoutOrder; VerticalFlex = Enum.UIFlexAlignment.Fill; })
+		new("UIPadding", { Parent = tabframe; PaddingBottom =UDim.new(0, 5); PaddingLeft =UDim.new(0, 5); PaddingRight =UDim.new(0, 5); PaddingTop =UDim.new(0, 5); })
+		new("UIListLayout", { Parent = leftc; HorizontalFlex = Enum.UIFlexAlignment.Fill; Padding =UDim.new(0, 10); SortOrder = Enum.SortOrder.LayoutOrder; VerticalFlex = Enum.UIFlexAlignment.Fill; })
+		new("UIListLayout", { Parent = rightc; HorizontalFlex = Enum.UIFlexAlignment.Fill; Padding =UDim.new(0, 10); SortOrder = Enum.SortOrder.LayoutOrder; VerticalFlex = Enum.UIFlexAlignment.Fill; })
 
 
 
-		local tabbutton = new("TextButton", { Parent = tabbuttons; Name = "tabbutton"; AutoButtonColor = false; BackgroundColor3 = Color3.fromRGB(15, 15, 15); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal); Size = UDim2.new(1, 0, 0, 30); Text = tab.name; TextColor3 = Color3.fromRGB(255, 255, 255); TextSize = 14; TextXAlignment = Enum.TextXAlignment.Left; }) :: TextButton 
-		local accent = new("Frame", { Parent = tabbutton; Name = "accent"; AnchorPoint = Vector2.new(0, 0.5); BackgroundColor3 = Color3.fromRGB(255, 0, 245); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Position = UDim2.new(0, -9, 0.5, 0); Size = UDim2.new(0, 2, 1, -2); Visible = false; }) 
-		new("UIStroke", { Parent = tabbutton; ApplyStrokeMode = Enum.ApplyStrokeMode.Border; BorderStrokePosition = Enum.BorderStrokePosition.Inner; }) 
-		new("UIPadding", { Parent = tabbutton; PaddingLeft =UDim.new(0, 10); }) 
+		local tabbutton = new("TextButton", { Parent = tabbuttons; Name = "tabbutton"; AutoButtonColor = false; BackgroundColor3 = Color3.fromRGB(15, 15, 15); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal); Size = UDim2.new(1, 0, 0, 30); Text = tab.name; TextColor3 = Color3.fromRGB(255, 255, 255); TextSize = 14; TextXAlignment = Enum.TextXAlignment.Left; }) :: TextButton
+		local accent = new("Frame", { Parent = tabbutton; Name = "accent"; AnchorPoint = Vector2.new(0, 0.5); BackgroundColor3 = Color3.fromRGB(255, 0, 245); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Position = UDim2.new(0, -9, 0.5, 0); Size = UDim2.new(0, 2, 1, -2); Visible = false; })
+		new("UIStroke", { Parent = tabbutton; ApplyStrokeMode = Enum.ApplyStrokeMode.Border; BorderStrokePosition = Enum.BorderStrokePosition.Inner; })
+		new("UIPadding", { Parent = tabbutton; PaddingLeft =UDim.new(0, 10); })
 
 		function tab:toggle(b : boolean)
 			if (b == nil or typeof(b) ~= 'boolean') then b = not tab.active end
@@ -948,17 +930,17 @@ function lib:win(name, ...)
 				active = true;
 			}, ... or {});
 
-			local groupframe = new("Frame", { Parent = group.side == 'left' and leftc or rightc; Name = "groupframe"; BackgroundColor3 = Color3.fromRGB(18, 18, 18); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Size = UDim2.new(1, group.size); }) :: Frame 
-			local titlecard = new("Frame", { Parent = groupframe; Name = "titlecard"; AutomaticSize =Enum.AutomaticSize.X; BackgroundColor3 = Color3.fromRGB(18, 18, 18); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Position = UDim2.fromOffset(8, -1); Size = UDim2.fromOffset(0, 2); }) :: Frame 
-			local titleshadow = new("TextLabel", { Parent = titlecard; Name = "titleshadow"; AutomaticSize =Enum.AutomaticSize.X; BackgroundColor3 = Color3.fromRGB(18, 18, 18); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal); Position = UDim2.fromOffset(1, -5); Size = UDim2.fromOffset(0, 6); Text = group.name; TextColor3 = Color3.fromRGB(0, 0, 0); TextSize = 14; }) :: TextLabel 
-			local titlelabel = new("TextLabel", { Parent = titleshadow; Name = "titlelabel"; AutomaticSize =Enum.AutomaticSize.X; BackgroundColor3 = Color3.fromRGB(18, 18, 18); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal); Position = UDim2.fromOffset(-1, -1); Size = UDim2.fromOffset(0, 5); Text = group.name; TextColor3 = Color3.fromRGB(255, 255, 255); TextSize = 14; }) :: TextLabel 
-			local groupcontent = new("ScrollingFrame", { Parent = groupframe; Name = "groupcontent"; Active = true; AutomaticCanvasSize =Enum.AutomaticSize.Y; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; BottomImage = "rbxassetid://132155326"; CanvasSize = UDim2.fromScale(0, 0); MidImage = "rbxassetid://132155326"; ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0); ScrollBarThickness = 2; Size = UDim2.fromScale(1, 1); TopImage = "rbxassetid://132155326"; }) :: ScrollingFrame 
-			new("UIStroke", { Parent = groupframe; BorderStrokePosition = Enum.BorderStrokePosition.Inner; }) 
-			new("UIStroke", { Parent = groupframe; Color = Color3.fromRGB(28, 28, 28); }) 
-			new("UIPadding", { Parent = titleshadow; }) 
-			new("UIPadding", { Parent = titlelabel; PaddingLeft =UDim.new(0, 3); PaddingRight =UDim.new(0, 3); }) 
-			new("UIListLayout", { Parent = groupcontent; Padding =UDim.new(0, 8); SortOrder = Enum.SortOrder.LayoutOrder; }) 
-			new("UIPadding", { Parent = groupcontent; PaddingBottom =UDim.new(0, 10); PaddingLeft =UDim.new(0, 26); PaddingRight =UDim.new(0, 30); PaddingTop =UDim.new(0, 12); }) 
+			local groupframe = new("Frame", { Parent = group.side == 'left' and leftc or rightc; Name = "groupframe"; BackgroundColor3 = Color3.fromRGB(18, 18, 18); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Size = UDim2.new(1, group.size); }) :: Frame
+			local titlecard = new("Frame", { Parent = groupframe; Name = "titlecard"; AutomaticSize =Enum.AutomaticSize.X; BackgroundColor3 = Color3.fromRGB(18, 18, 18); BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; Position = UDim2.fromOffset(8, -1); Size = UDim2.fromOffset(0, 2); }) :: Frame
+			local titleshadow = new("TextLabel", { Parent = titlecard; Name = "titleshadow"; AutomaticSize =Enum.AutomaticSize.X; BackgroundColor3 = Color3.fromRGB(18, 18, 18); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal); Position = UDim2.fromOffset(1, -5); Size = UDim2.fromOffset(0, 6); Text = group.name; TextColor3 = Color3.fromRGB(0, 0, 0); TextSize = 14; }) :: TextLabel
+			local titlelabel = new("TextLabel", { Parent = titleshadow; Name = "titlelabel"; AutomaticSize =Enum.AutomaticSize.X; BackgroundColor3 = Color3.fromRGB(18, 18, 18); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal); Position = UDim2.fromOffset(-1, -1); Size = UDim2.fromOffset(0, 5); Text = group.name; TextColor3 = Color3.fromRGB(255, 255, 255); TextSize = 14; }) :: TextLabel
+			local groupcontent = new("ScrollingFrame", { Parent = groupframe; Name = "groupcontent"; Active = true; AutomaticCanvasSize =Enum.AutomaticSize.Y; BackgroundColor3 = Color3.fromRGB(255, 255, 255); BackgroundTransparency = 1; BorderColor3 = Color3.fromRGB(0, 0, 0); BorderSizePixel = 0; BottomImage = "rbxassetid://132155326"; CanvasSize = UDim2.fromScale(0, 0); MidImage = "rbxassetid://132155326"; ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0); ScrollBarThickness = 2; Size = UDim2.fromScale(1, 1); TopImage = "rbxassetid://132155326"; }) :: ScrollingFrame
+			new("UIStroke", { Parent = groupframe; BorderStrokePosition = Enum.BorderStrokePosition.Inner; })
+			new("UIStroke", { Parent = groupframe; Color = Color3.fromRGB(28, 28, 28); })
+			new("UIPadding", { Parent = titleshadow; })
+			new("UIPadding", { Parent = titlelabel; PaddingLeft =UDim.new(0, 3); PaddingRight =UDim.new(0, 3); })
+			new("UIListLayout", { Parent = groupcontent; Padding =UDim.new(0, 8); SortOrder = Enum.SortOrder.LayoutOrder; })
+			new("UIPadding", { Parent = groupcontent; PaddingBottom =UDim.new(0, 10); PaddingLeft =UDim.new(0, 26); PaddingRight =UDim.new(0, 30); PaddingTop =UDim.new(0, 12); })
 
 			function group:toggle(b : boolean)
 				if (b == nil or typeof(b) ~= 'boolean') then b = not tab.active end
@@ -986,7 +968,7 @@ function lib:win(name, ...)
 	end
 
 	window.i = windowframe
-	table.insert(lib['BROWEN😂😂'], window)
+	table.insert(lib.windows, window)
 	return window
 end
 
