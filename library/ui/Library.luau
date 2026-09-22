@@ -372,6 +372,7 @@ local Templates = {
     --// Library \\--
     Window = {
         Title = "No Title",
+        Version = "",
         Footer = "No Footer",
 
         Position = UDim2.fromOffset(6, 6),
@@ -389,7 +390,7 @@ local Templates = {
         SnapMargin = 8,
         SnapAvoidCoreGui = true,
 
-        SearchbarSize = UDim2.fromScale(1, 1),
+        SearchbarSize = UDim2.fromOffset(220, 32),
         GlobalSearch = false,
 
         CornerRadius = 4,
@@ -10780,6 +10781,7 @@ function Library:CreateWindow(WindowInfo)
     local MainFrame
     local DividerLine
     local TitleHolder
+    local TitleInfo
     local WindowTitle
     local WindowIcon
     local RightWrapper
@@ -10943,18 +10945,39 @@ function Library:CreateWindow(WindowInfo)
             })
         end
 
-        local X = Library:GetTextBounds(
-            WindowInfo.Title,
-            Library.Scheme.Font,
-            20,
-            (TitleHolder.AbsoluteSize.X / Library.DPIScale) - (WindowInfo.Icon and WindowInfo.IconSize.X.Offset + 6 or 0) - 12
-        )
+        local TitleWidth = (TitleHolder.AbsoluteSize.X / Library.DPIScale)
+            - (WindowInfo.Icon and WindowInfo.IconSize.X.Offset + 6 or 0)
+            - 12
+        TitleInfo = New("Frame", {
+            BackgroundTransparency = 1,
+            Size = UDim2.new(0, TitleWidth, 1, 0),
+            Parent = TitleHolder,
+        })
+        New("UIListLayout", {
+            FillDirection = Enum.FillDirection.Vertical,
+            HorizontalAlignment = Enum.HorizontalAlignment.Left,
+            VerticalAlignment = Enum.VerticalAlignment.Center,
+            Parent = TitleInfo,
+        })
         WindowTitle = New("TextLabel", {
             BackgroundTransparency = 1,
-            Size = UDim2.new(0, X, 1, 0),
+            Size = UDim2.new(1, 0, 0, 20),
             Text = WindowInfo.Title,
-            TextSize = 20,
-            Parent = TitleHolder,
+            TextSize = 16,
+            TextTruncate = Enum.TextTruncate.AtEnd,
+            TextXAlignment = Enum.TextXAlignment.Left,
+            Parent = TitleInfo,
+        })
+        New("TextLabel", {
+            BackgroundTransparency = 1,
+            Size = UDim2.new(1, 0, 0, 14),
+            Text = WindowInfo.Version,
+            TextSize = 12,
+            TextTransparency = 0.5,
+            TextTruncate = Enum.TextTruncate.AtEnd,
+            TextXAlignment = Enum.TextXAlignment.Left,
+            Visible = WindowInfo.Version ~= "",
+            Parent = TitleInfo,
         })
 
         --// Top Right Bar \\--
@@ -10968,7 +10991,7 @@ function Library:CreateWindow(WindowInfo)
 
         New("UIListLayout", {
             FillDirection = Enum.FillDirection.Horizontal,
-            HorizontalAlignment = Enum.HorizontalAlignment.Left,
+            HorizontalAlignment = Enum.HorizontalAlignment.Right,
             VerticalAlignment = Enum.VerticalAlignment.Center,
             Padding = UDim.new(0, 8),
             Parent = RightWrapper,
@@ -11424,7 +11447,7 @@ function Library:CreateWindow(WindowInfo)
             IsCompact = Window:GetSidebarWidth() <= WindowInfo.CompactWidthActivation
         end
 
-        WindowTitle.Visible = not IsCompact
+        TitleInfo.Visible = not IsCompact
         if not WindowInfo.Icon then
             WindowIcon.Visible = IsCompact
         end
