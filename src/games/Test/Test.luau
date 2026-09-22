@@ -1,23 +1,54 @@
-﻿local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Library = require(ReplicatedStorage:WaitForChild("library"):WaitForChild("ui"):WaitForChild("Library"))
+local repo = "https://raw.githubusercontent.com/aechlaenm/PixelHub/main/"
 
-return function()
-	local window = Library:win("Test", { title = "PixelHub UI Test" })
-	local controls = window:tab("Controls"):group("Basic")
+local function loadModule(path)
+	local chunk, compileError = loadstring(game:HttpGet(repo .. path))
+	assert(chunk, string.format("Failed to compile %s: %s", path, tostring(compileError)))
 
-	controls:butt({
-		text = "Button test",
-		call = function()
-			print("Button works")
-		end,
-	})
-
-	controls:newtoggle({
-		text = "Toggle test",
-		call = function(enabled)
-			print("Toggle:", enabled)
-		end,
-	})
-
-	return window
+	local module = chunk()
+	assert(type(module) == "table", path .. " did not return a table")
+	return module
 end
+
+local Library = loadModule("library/ui/Library.luau")
+local ThemeManager = loadModule("library/ui/addons/ThemeManager.luau")
+local SaveManager = loadModule("library/ui/addons/SaveManager.luau")
+
+assert(type(Library.CreateWindow) == "function", "Obsidian Library missing CreateWindow")
+ThemeManager:SetLibrary(Library)
+ThemeManager:SetFolder("PixelHub")
+SaveManager:SetLibrary(Library)
+SaveManager:IgnoreThemeSettings()
+SaveManager:SetFolder("PixelHub")
+SaveManager:SetSubFolder("Test")
+
+local window = Library:CreateWindow({
+	Title = "PixelHub UI Test",
+	Footer = "PixelHub",
+	Center = true,
+	AutoShow = true,
+})
+
+local controls = window:AddTab("Controls"):AddGroupbox({
+	Side = "Left",
+	Name = "Basic",
+})
+
+controls:AddButton({
+	Text = "Button test",
+	Func = function()
+		print("Button works")
+	end,
+})
+
+controls:AddToggle("ToggleTest", {
+	Text = "Toggle test",
+	Default = false,
+	Callback = function(enabled)
+		print("Toggle:", enabled)
+	end,
+})
+
+local settings = window:AddTab("Settings")
+SaveManager:BuildConfigSection(settings)
+ThemeManager:ApplyToTab(settings)
+SaveManager:LoadAutoloadConfig()
