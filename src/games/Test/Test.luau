@@ -1,4 +1,4 @@
-local repo = "https://raw.githubusercontent.com/aechlaenm/PixelHub/main/"
+local repo = "https://raw.githubusercontent.com/aechlaenm/PixelHub/1d5520990e2c751d53ac7f6495afe200bd94a742/"
 local environment = (getgenv and getgenv()) or shared or _G
 
 if not game:IsLoaded() then
