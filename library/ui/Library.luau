@@ -10787,6 +10787,10 @@ function Library:CreateWindow(WindowInfo)
     local WindowIcon
     local RightWrapper
     local SearchBox
+    local MinimizeButton
+    local CloseButton
+    local WindowControlsWidth = 46
+    local WindowControlsGap = 8
     local CurrentTabInfo
     local CurrentTabLabel
     local CurrentTabDescription
@@ -10796,6 +10800,7 @@ function Library:CreateWindow(WindowInfo)
     local BackgroundImage
     local HasBackgroundImage = false
     local BottomBackground
+    local BottomBar
     local FooterLabel
     local TopBar
     local WindowSnapConfig = {
@@ -10978,8 +10983,8 @@ function Library:CreateWindow(WindowInfo)
         RightWrapper = New("Frame", {
             AnchorPoint = Vector2.new(1, 0.5),
             BackgroundTransparency = 1,
-            Position = UDim2.new(1, -10, 0.5, 0),
-            Size = UDim2.new(1, -InitialLeftWidth - 19, 1, -8),
+            Position = UDim2.new(1, -10 - WindowControlsWidth - WindowControlsGap, 0.5, 0),
+            Size = UDim2.new(1, -InitialLeftWidth - 19 - WindowControlsWidth - WindowControlsGap, 1, -8),
             Parent = TopBar,
         })
 
@@ -11081,6 +11086,51 @@ function Library:CreateWindow(WindowInfo)
             Library:ApplyLucideIcon(SearchIconImage, SearchIcon)
         end
 
+        local WindowControls = New("Frame", {
+            AnchorPoint = Vector2.new(1, 0.5),
+            BackgroundTransparency = 1,
+            Position = UDim2.new(1, -10, 0.5, 0),
+            Size = UDim2.new(0, WindowControlsWidth, 1, -8),
+            Parent = TopBar,
+        })
+        New("UIListLayout", {
+            FillDirection = Enum.FillDirection.Horizontal,
+            HorizontalAlignment = Enum.HorizontalAlignment.Right,
+            VerticalAlignment = Enum.VerticalAlignment.Center,
+            Padding = UDim.new(0, 2),
+            Parent = WindowControls,
+        })
+        MinimizeButton = New("TextButton", {
+            AutoButtonColor = false,
+            BackgroundColor3 = "MainColor",
+            BackgroundTransparency = 1,
+            BorderSizePixel = 0,
+            Size = UDim2.fromOffset(22, 22),
+            Text = "—",
+            TextSize = 16,
+            TextTransparency = 0.25,
+            Parent = WindowControls,
+        })
+        CloseButton = New("TextButton", {
+            AutoButtonColor = false,
+            BackgroundColor3 = "MainColor",
+            BackgroundTransparency = 1,
+            BorderSizePixel = 0,
+            Size = UDim2.fromOffset(22, 22),
+            Text = "×",
+            TextSize = 18,
+            TextTransparency = 0.25,
+            Parent = WindowControls,
+        })
+        for _, Button in { MinimizeButton, CloseButton } do
+            Library:GiveSignal(Button.MouseEnter:Connect(function()
+                TweenService:Create(Button, Library.TweenInfo, { BackgroundTransparency = 0.2 }):Play()
+            end))
+            Library:GiveSignal(Button.MouseLeave:Connect(function()
+                TweenService:Create(Button, Library.TweenInfo, { BackgroundTransparency = 1 }):Play()
+            end))
+        end
+
         --// Bottom Bar \\--
         BottomBackground = New("Frame", {
             AnchorPoint = Vector2.new(0, 1),
@@ -11099,7 +11149,7 @@ function Library:CreateWindow(WindowInfo)
             ZIndex = 3,
         })
 
-        local BottomBar = New("Frame", {
+        BottomBar = New("Frame", {
             AnchorPoint = Vector2.new(0, 1),
             BackgroundTransparency = 1,
             Position = UDim2.fromScale(0, 1),
@@ -13866,6 +13916,33 @@ function Library:CreateWindow(WindowInfo)
             end
         end
     end
+
+    local RestoredWindowSize
+    local Minimized = false
+    Library:GiveSignal(MinimizeButton.MouseButton1Click:Connect(function()
+        if Minimized then
+            MainFrame.Size = RestoredWindowSize
+            Tabs.Visible = true
+            Container.Visible = true
+            DividerLine.Visible = true
+            BottomBackground.Visible = true
+            BottomBar.Visible = true
+        else
+            RestoredWindowSize = MainFrame.Size
+            MainFrame.Size = UDim2.new(RestoredWindowSize.X.Scale, RestoredWindowSize.X.Offset, 0, 49)
+            Tabs.Visible = false
+            Container.Visible = false
+            DividerLine.Visible = false
+            BottomBackground.Visible = false
+            BottomBar.Visible = false
+        end
+
+        Minimized = not Minimized
+    end))
+    Library:GiveSignal(CloseButton.MouseButton1Click:Connect(function()
+        SearchBox:ReleaseFocus()
+        Window:Toggle(false)
+    end))
 
     function Library:Toggle(Value: boolean?)
         return Window:Toggle(Value)

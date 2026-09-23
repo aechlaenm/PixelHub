@@ -112,4 +112,8 @@ controls:AddToggle("ToggleTest", {
 local settings = window:AddTab("Settings")
 SaveManager:BuildConfigSection(settings)
 ThemeManager:ApplyToTab(settings)
+settings:AddGroupbox({ Name = "PixelHub", Side = "Right" }):AddButton({
+	Text = "Unload PixelHub",
+	Func = unload,
+})
 SaveManager:LoadAutoloadConfig()
