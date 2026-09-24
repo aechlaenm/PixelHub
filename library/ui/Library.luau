@@ -10843,6 +10843,14 @@ function Library:CreateWindow(WindowInfo)
         return NextTabOrder
     end
 
+    local function SpaceLetters(Text)
+        local Letters = {}
+        for _, Codepoint in utf8.codes(Text) do
+            table.insert(Letters, utf8.char(Codepoint))
+        end
+        return table.concat(Letters, " ")
+    end
+
     local function GetTabParent(Category, Order)
         if typeof(Category) ~= "string" or Category == "" then
             return Tabs
@@ -10862,22 +10870,23 @@ function Library:CreateWindow(WindowInfo)
             Parent = Tabs,
         })
         local Padding = New("UIPadding", {
-            PaddingTop = UDim.new(0, IsCompact and 0 or 8),
+            PaddingTop = UDim.new(0, IsCompact and 0 or 14),
             Parent = Frame,
         })
         New("UIListLayout", {
-            Padding = UDim.new(0, TabButtonsStyle.Gap),
+            Padding = UDim.new(0, math.max(TabButtonsStyle.Gap, 7)),
             Parent = Frame,
         })
         local Header = New("TextLabel", {
             BackgroundTransparency = 1,
+            FontFace = Font.fromEnum(Enum.Font.GothamSemibold),
             LayoutOrder = -1,
-            Position = UDim2.fromOffset(30, 0),
-            Size = UDim2.new(1, -30, 0, 18),
-            Text = string.upper(Category),
+            Position = UDim2.fromOffset(12, 0),
+            Size = UDim2.new(1, -12, 0, 18),
+            Text = SpaceLetters(string.upper(Category)),
             TextColor3 = "FontColor",
             TextSize = 11,
-            TextTransparency = 0.5,
+            TextTransparency = 0.45,
             TextXAlignment = Enum.TextXAlignment.Left,
             Visible = not IsCompact,
             Parent = Frame,
@@ -11556,7 +11565,7 @@ function Library:CreateWindow(WindowInfo)
 
         for _, Category in TabCategories do
             Category.Header.Visible = not IsCompact
-            Category.Padding.PaddingTop = UDim.new(0, IsCompact and 0 or 8)
+            Category.Padding.PaddingTop = UDim.new(0, IsCompact and 0 or 14)
         end
     end
 
