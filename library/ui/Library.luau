@@ -10874,7 +10874,7 @@ function Library:CreateWindow(WindowInfo)
             Parent = Frame,
         })
         New("UIListLayout", {
-            Padding = UDim.new(0, math.max(TabButtonsStyle.Gap, 7)),
+            Padding = UDim.new(0, math.max(TabButtonsStyle.Gap, 10)),
             Parent = Frame,
         })
         local Header = New("TextLabel", {
@@ -11722,7 +11722,7 @@ function Library:CreateWindow(WindowInfo)
                 Size = UDim2.new(1, -30, 1, 0),
                 Text = Name,
                 TextSize = 16,
-                TextTransparency = 0.5,
+                TextTransparency = 0.35,
                 TextXAlignment = Enum.TextXAlignment.Left,
                 Visible = not IsCompact,
                 Parent = ButtonHolder,
@@ -12830,7 +12830,7 @@ function Library:CreateWindow(WindowInfo)
             end
 
             TweenService:Create(TabLabel, Library.TweenInfo, {
-                TextTransparency = Hovering and 0.25 or 0.5,
+                TextTransparency = Hovering and 0.25 or 0.35,
             }):Play()
             if TabIcon then
                 TweenService:Create(TabIcon, Library.TweenInfo, {
@@ -12891,7 +12891,7 @@ function Library:CreateWindow(WindowInfo)
             end
 
             TweenService:Create(TabLabel, Library.TweenInfo, {
-                TextTransparency = 0.5,
+                TextTransparency = 0.35,
             }):Play()
 
             if TabIcon then
@@ -13093,7 +13093,7 @@ function Library:CreateWindow(WindowInfo)
                 Size = UDim2.new(1, -30, 1, 0),
                 Text = Name,
                 TextSize = 16,
-                TextTransparency = 0.5,
+                TextTransparency = 0.35,
                 TextXAlignment = Enum.TextXAlignment.Left,
                 Visible = not IsCompact,
                 Parent = ButtonHolder,
@@ -13285,7 +13285,7 @@ function Library:CreateWindow(WindowInfo)
             end
 
             TweenService:Create(TabLabel, Library.TweenInfo, {
-                TextTransparency = Hovering and 0.25 or 0.5,
+                TextTransparency = Hovering and 0.25 or 0.35,
             }):Play()
             if TabIcon then
                 TweenService:Create(TabIcon, Library.TweenInfo, {
@@ -13350,7 +13350,7 @@ function Library:CreateWindow(WindowInfo)
             end
 
             TweenService:Create(TabLabel, Library.TweenInfo, {
-                TextTransparency = 0.5,
+                TextTransparency = 0.35,
             }):Play()
 
             if TabIcon then
