@@ -436,9 +436,9 @@ local Templates = {
         TabSwipeOffset = 26,
         TabSwipeFrom = "bottom",
         TabButtonsStyle = {
-            Gap = 0,
+            Gap = 4,
             Padding = 0,
-            CornerRadius = 0,
+            CornerRadius = 6,
             Indicator = false,
             IndicatorWidth = 2,
             IndicatorHeight = 20,
@@ -10829,6 +10829,63 @@ function Library:CreateWindow(WindowInfo)
         and not IsCompact
         and InitialAvailableSidebarWidth < MinimumExpandedSidebarWidth
     local LastExpandedWidth = math.max(InitialLeftWidth, MinimumExpandedSidebarWidth)
+    local TabCategories = {}
+    local NextTabOrder = 0
+
+    local function ResolveTabOrder(Order)
+        Order = tonumber(Order)
+        if Order then
+            NextTabOrder = math.max(NextTabOrder, Order)
+            return Order
+        end
+
+        NextTabOrder += 1
+        return NextTabOrder
+    end
+
+    local function GetTabParent(Category, Order)
+        if typeof(Category) ~= "string" or Category == "" then
+            return Tabs
+        end
+
+        local Key = string.lower(Category)
+        local Section = TabCategories[Key]
+        if Section then
+            return Section.Frame
+        end
+
+        local Frame = New("Frame", {
+            AutomaticSize = Enum.AutomaticSize.Y,
+            BackgroundTransparency = 1,
+            LayoutOrder = Order,
+            Size = UDim2.new(1, 0, 0, 0),
+            Parent = Tabs,
+        })
+        local Padding = New("UIPadding", {
+            PaddingTop = UDim.new(0, IsCompact and 0 or 8),
+            Parent = Frame,
+        })
+        New("UIListLayout", {
+            Padding = UDim.new(0, TabButtonsStyle.Gap),
+            Parent = Frame,
+        })
+        local Header = New("TextLabel", {
+            BackgroundTransparency = 1,
+            LayoutOrder = -1,
+            Position = UDim2.fromOffset(30, 0),
+            Size = UDim2.new(1, -30, 0, 18),
+            Text = string.upper(Category),
+            TextColor3 = "FontColor",
+            TextSize = 11,
+            TextTransparency = 0.5,
+            TextXAlignment = Enum.TextXAlignment.Left,
+            Visible = not IsCompact,
+            Parent = Frame,
+        })
+
+        TabCategories[Key] = { Frame = Frame, Header = Header, Padding = Padding }
+        return Frame
+    end
 
     do
         Library.KeybindFrame, Library.KeybindContainer = Library:AddDraggableMenu("Keybinds")
@@ -11496,6 +11553,11 @@ function Library:CreateWindow(WindowInfo)
             Button.Padding.PaddingTop = UDim.new(0, IsCompact and 6 or 11)
             Button.Icon.SizeConstraint = IsCompact and Enum.SizeConstraint.RelativeXY or Enum.SizeConstraint.RelativeYY
         end
+
+        for _, Category in TabCategories do
+            Category.Header.Visible = not IsCompact
+            Category.Padding.PaddingTop = UDim.new(0, IsCompact and 0 or 8)
+        end
     end
 
     function Window:IsSidebarCompacted()
@@ -11572,6 +11634,7 @@ function Library:CreateWindow(WindowInfo)
         local Description = nil
         local Tooltip = nil
         local Order = nil
+        local Category = nil
 
         if select("#", ...) == 1 and typeof(...) == "table" then
             local Info = select(1, ...)
@@ -11580,16 +11643,17 @@ function Library:CreateWindow(WindowInfo)
             Description = Info.Description
             Tooltip = Info.Tooltip
             Order = Info.Order
+            Category = Info.Category
         else
             Name = select(1, ...)
             Icon = select(2, ...)
             Description = select(3, ...)
             Order = select(4, ...)
+            Category = select(5, ...)
         end
 
-        if not tonumber(Order) then
-            Order = #Tabs:GetChildren()
-        end
+        Order = ResolveTabOrder(Order)
+        local TabButtonParent = GetTabParent(Category, Order)
 
         local TabButton: TextButton
         local TabIndicator
@@ -11608,7 +11672,7 @@ function Library:CreateWindow(WindowInfo)
                 Size = UDim2.new(1, 0, 0, 40),
                 Text = "",
                 LayoutOrder = Order,
-                Parent = Tabs,
+                Parent = TabButtonParent,
             })
             New("UICorner", {
                 CornerRadius = UDim.new(0, TabButtonsStyle.CornerRadius),
@@ -12940,6 +13004,7 @@ function Library:CreateWindow(WindowInfo)
         local Description = nil
         local Tooltip = nil
         local Order = nil
+        local Category = nil
 
         if select("#", ...) == 1 and typeof(...) == "table" then
             local Info = select(1, ...)
@@ -12948,16 +13013,17 @@ function Library:CreateWindow(WindowInfo)
             Description = Info.Description
             Tooltip = Info.Tooltip
             Order = Info.Order
+            Category = Info.Category
         else
             Name = select(1, ...) or "Tab"
             Icon = select(2, ...)
             Description = select(3, ...)
             Order = select(4, ...)
+            Category = select(5, ...)
         end
 
-        if not tonumber(Order) then
-            Order = #Tabs:GetChildren()
-        end
+        Order = ResolveTabOrder(Order)
+        local TabButtonParent = GetTabParent(Category, Order)
 
         Icon = Icon or "key"
 
@@ -12976,7 +13042,7 @@ function Library:CreateWindow(WindowInfo)
                 Size = UDim2.new(1, 0, 0, 40),
                 Text = "",
                 LayoutOrder = Order,
-                Parent = Tabs,
+                Parent = TabButtonParent,
             })
             New("UICorner", {
                 CornerRadius = UDim.new(0, TabButtonsStyle.CornerRadius),
