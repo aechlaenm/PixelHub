@@ -10831,6 +10831,7 @@ function Library:CreateWindow(WindowInfo)
     local LastExpandedWidth = math.max(InitialLeftWidth, MinimumExpandedSidebarWidth)
     local TabCategories = {}
     local NextTabOrder = 0
+    local SidebarContentPadding = 12
 
     local function ResolveTabOrder(Order)
         Order = tonumber(Order)
@@ -10877,22 +10878,30 @@ function Library:CreateWindow(WindowInfo)
             Padding = UDim.new(0, math.max(TabButtonsStyle.Gap, 10)),
             Parent = Frame,
         })
-        local Header = New("TextLabel", {
+        local HeaderRow = New("Frame", {
+            BackgroundTransparency = 1,
+            LayoutOrder = -1,
+            Size = UDim2.new(1, 0, 0, 18),
+            Visible = not IsCompact,
+            Parent = Frame,
+        })
+        New("UIPadding", {
+            PaddingLeft = UDim.new(0, SidebarContentPadding),
+            Parent = HeaderRow,
+        })
+        New("TextLabel", {
             BackgroundTransparency = 1,
             FontFace = Font.fromEnum(Enum.Font.GothamSemibold),
-            LayoutOrder = -1,
-            Position = UDim2.fromOffset(12, 0),
-            Size = UDim2.new(1, -12, 0, 18),
+            Size = UDim2.fromScale(1, 1),
             Text = SpaceLetters(string.upper(Category)),
             TextColor3 = "FontColor",
             TextSize = 11,
             TextTransparency = 0.45,
             TextXAlignment = Enum.TextXAlignment.Left,
-            Visible = not IsCompact,
-            Parent = Frame,
+            Parent = HeaderRow,
         })
 
-        TabCategories[Key] = { Frame = Frame, Header = Header, Padding = Padding }
+        TabCategories[Key] = { Frame = Frame, HeaderRow = HeaderRow, Padding = Padding }
         return Frame
     end
 
@@ -11557,7 +11566,7 @@ function Library:CreateWindow(WindowInfo)
 
             Button.Label.Visible = not IsCompact
             Button.Padding.PaddingBottom = UDim.new(0, IsCompact and 6 or 11)
-            Button.Padding.PaddingLeft = UDim.new(0, IsCompact and 6 or 12)
+            Button.Padding.PaddingLeft = UDim.new(0, IsCompact and 6 or SidebarContentPadding)
             Button.Padding.PaddingRight = UDim.new(0, IsCompact and 6 or 12)
             Button.Padding.PaddingTop = UDim.new(0, IsCompact and 6 or 11)
             Button.Icon.AnchorPoint = IsCompact and Vector2.new(0.5, 0.5) or Vector2.new(0, 0.5)
@@ -11565,7 +11574,7 @@ function Library:CreateWindow(WindowInfo)
         end
 
         for _, Category in TabCategories do
-            Category.Header.Visible = not IsCompact
+            Category.HeaderRow.Visible = not IsCompact
             Category.Padding.PaddingTop = UDim.new(0, IsCompact and 0 or 14)
         end
     end
@@ -11713,7 +11722,7 @@ function Library:CreateWindow(WindowInfo)
             })
             local ButtonPadding = New("UIPadding", {
                 PaddingBottom = UDim.new(0, IsCompact and 6 or 11),
-                PaddingLeft = UDim.new(0, IsCompact and 6 or 12),
+                PaddingLeft = UDim.new(0, IsCompact and 6 or SidebarContentPadding),
                 PaddingRight = UDim.new(0, IsCompact and 6 or 12),
                 PaddingTop = UDim.new(0, IsCompact and 6 or 11),
                 Parent = ButtonHolder,
@@ -13085,7 +13094,7 @@ function Library:CreateWindow(WindowInfo)
             })
             local ButtonPadding = New("UIPadding", {
                 PaddingBottom = UDim.new(0, IsCompact and 6 or 11),
-                PaddingLeft = UDim.new(0, IsCompact and 6 or 12),
+                PaddingLeft = UDim.new(0, IsCompact and 6 or SidebarContentPadding),
                 PaddingRight = UDim.new(0, IsCompact and 6 or 12),
                 PaddingTop = UDim.new(0, IsCompact and 6 or 11),
                 Parent = ButtonHolder,
