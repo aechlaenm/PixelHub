@@ -1,4 +1,4 @@
-local repo = "https://raw.githubusercontent.com/aechlaenm/PixelHub/4c78c9f430fbf2ed6c3c877443417341ca52c4b2/"
+local repo = "https://raw.githubusercontent.com/aechlaenm/PixelHub/64b9986212be78a64d99ee9aa8f39d2199b384cc/"
 local environment = (getgenv and getgenv()) or shared or _G
 
 if not game:IsLoaded() then
@@ -150,7 +150,7 @@ local window = Library:CreateWindow({
 	ShowCustomCursor = false,
 })
 
-local controls = window:AddTab("Controls"):AddGroupbox({
+local controls = window:AddTab({ Name = "Controls", Category = "MAIN" }):AddGroupbox({
 	Side = "Left",
 	Name = "Basic",
 })
@@ -170,7 +170,7 @@ controls:AddToggle("ToggleTest", {
 	end,
 })
 
-local settings = window:AddTab("Settings")
+local settings = window:AddTab({ Name = "Settings", Category = "OTHER" })
 SaveManager:BuildConfigSection(settings)
 ThemeManager:ApplyToTab(settings)
 settings:AddGroupbox({ Name = "PixelHub", Side = "Right" }):AddButton({
