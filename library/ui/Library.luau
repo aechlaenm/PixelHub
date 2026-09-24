@@ -2357,11 +2357,16 @@ function Library:MakeResizable(UI: GuiObject, DragFrame: GuiObject, Callback: ()
 
         if Dragging and IsHoverInput(Input) then
             local Delta = Input.Position - StartPos
+            local ViewportSize = workspace.CurrentCamera and workspace.CurrentCamera.ViewportSize
+                or Vector2.new(1920, 1080)
+            local Position = UI.AbsolutePosition
+            local MaxWidth = math.max(Library.MinSize.X, math.min(ViewportSize.X - 64, ViewportSize.X - Position.X))
+            local MaxHeight = math.max(Library.MinSize.Y, math.min(ViewportSize.Y - 64, ViewportSize.Y - Position.Y))
             UI.Size = UDim2.new(
                 FrameSize.X.Scale,
-                math.clamp(FrameSize.X.Offset + Delta.X, Library.MinSize.X, math.huge),
+                math.clamp(FrameSize.X.Offset + Delta.X, Library.MinSize.X, MaxWidth),
                 FrameSize.Y.Scale,
-                math.clamp(FrameSize.Y.Offset + Delta.Y, Library.MinSize.Y, math.huge)
+                math.clamp(FrameSize.Y.Offset + Delta.Y, Library.MinSize.Y, MaxHeight)
             )
             if Callback then
                 Library:SafeCallback(Callback)
@@ -10730,8 +10735,9 @@ function Library:CreateWindow(WindowInfo)
         until ViewportSize.X > 5 and ViewportSize.Y > 5
     end
 
-    local MaxX = ViewportSize.X - 64
-    local MaxY = ViewportSize.Y - 64
+    local BaseMinSize = Library.OriginalMinSize
+    local MaxX = math.max(1, ViewportSize.X - 64)
+    local MaxY = math.max(1, ViewportSize.Y - 64)
 
     Library.OriginalMinSize =
         Vector2.new(math.min(Library.OriginalMinSize.X, MaxX), math.min(Library.OriginalMinSize.Y, MaxY))
@@ -10796,6 +10802,8 @@ function Library:CreateWindow(WindowInfo)
     local ResizeButton
     local Tabs
     local Container
+    local Window
+    local UpdateResponsiveSidebar
     local BackgroundImage
     local HasBackgroundImage = false
     local BottomBackground
@@ -10811,7 +10819,16 @@ function Library:CreateWindow(WindowInfo)
 
     local InitialLeftWidth = math.ceil(WindowInfo.Size.X.Offset * 0.3)
     local IsCompact = WindowInfo.SidebarCompacted
-    local LastExpandedWidth = InitialLeftWidth
+    local InitialAvailableSidebarWidth = math.max(48, WindowInfo.Size.X.Offset - WindowInfo.MinContainerWidth - 1)
+    local MinimumExpandedSidebarWidth = math.max(
+        WindowInfo.MinSidebarWidth,
+        WindowInfo.DisableCompactingSnap and WindowInfo.CompactWidthActivation + 1 or 0
+    )
+    local ViewportCompacted =
+        WindowInfo.EnableCompacting
+        and not IsCompact
+        and InitialAvailableSidebarWidth < MinimumExpandedSidebarWidth
+    local LastExpandedWidth = math.max(InitialLeftWidth, MinimumExpandedSidebarWidth)
 
     do
         Library.KeybindFrame, Library.KeybindContainer = Library:AddDraggableMenu("Keybinds")
@@ -10954,12 +10971,10 @@ function Library:CreateWindow(WindowInfo)
             })
         end
 
-        local TitleWidth = (TitleHolder.AbsoluteSize.X / Library.DPIScale)
-            - (WindowInfo.Icon and WindowInfo.IconSize.X.Offset + 6 or 0)
-            - 12
+        local TitleWidthOffset = -12 - (WindowInfo.Icon and WindowInfo.IconSize.X.Offset + 6 or 0)
         TitleInfo = New("Frame", {
             BackgroundTransparency = 1,
-            Size = UDim2.new(0, TitleWidth, 1, 0),
+            Size = UDim2.new(1, TitleWidthOffset, 1, 0),
             Parent = TitleHolder,
         })
         New("UIListLayout", {
@@ -11174,6 +11189,9 @@ function Library:CreateWindow(WindowInfo)
             })
 
             Library:MakeResizable(MainFrame, ResizeButton, function()
+                if UpdateResponsiveSidebar then
+                    UpdateResponsiveSidebar()
+                end
                 for _, Tab in Library.Tabs do
                     Tab:Resize(true)
                 end
@@ -11237,7 +11255,7 @@ function Library:CreateWindow(WindowInfo)
     end
 
     --// Window Table \\--
-    local Window = {}
+    Window = {}
     local Fading = false
 
     local function SetUICorner(UICorner, Corner, HalfValue)
@@ -11493,12 +11511,13 @@ function Library:CreateWindow(WindowInfo)
     end
 
     function Window:SetSidebarWidth(Width)
-        Width = math.clamp(Width, 48, MainFrame.Size.X.Offset - WindowInfo.MinContainerWidth - 1)
+        local MaxWidth = math.max(48, MainFrame.Size.X.Offset - WindowInfo.MinContainerWidth - 1)
+        Width = math.clamp(Width, 48, MaxWidth)
 
         DividerLine.Position = UDim2.fromOffset(Width, 0)
 
         TitleHolder.Size = UDim2.new(0, Width, 1, 0)
-        RightWrapper.Size = UDim2.new(1, -Width - 19, 1, -8)
+        RightWrapper.Size = UDim2.new(1, -Width - 19 - WindowControlsWidth - WindowControlsGap, 1, -8)
         Tabs.Size = UDim2.new(0, Width, 1, -70)
         Container.Size = UDim2.new(1, -Width - 1, 1, -70)
 
@@ -11507,6 +11526,20 @@ function Library:CreateWindow(WindowInfo)
         end
         if not IsCompact then
             LastExpandedWidth = Width
+        end
+    end
+
+    UpdateResponsiveSidebar = function()
+        local AvailableSidebarWidth = math.max(48, MainFrame.Size.X.Offset - WindowInfo.MinContainerWidth - 1)
+        if WindowInfo.EnableCompacting and AvailableSidebarWidth < MinimumExpandedSidebarWidth then
+            ViewportCompacted = ViewportCompacted or not WindowInfo.SidebarCompacted
+            Window:SetSidebarWidth(WindowInfo.SidebarCompactWidth)
+        elseif ViewportCompacted then
+            ViewportCompacted = false
+            local ExpandedWidth = math.max(LastExpandedWidth, MinimumExpandedSidebarWidth)
+            Window:SetSidebarWidth(math.min(ExpandedWidth, AvailableSidebarWidth))
+        else
+            Window:SetSidebarWidth(math.min(Window:GetSidebarWidth(), AvailableSidebarWidth))
         end
     end
 
@@ -13999,8 +14032,10 @@ function Library:CreateWindow(WindowInfo)
     end
 
     Window:SetAlwaysOnTop(WindowInfo.AlwaysOnTop)
-    if WindowInfo.EnableCompacting and WindowInfo.SidebarCompacted then
+    if WindowInfo.SidebarCompacted then
         Window:SetSidebarWidth(WindowInfo.SidebarCompactWidth)
+    else
+        UpdateResponsiveSidebar()
     end
     if WindowInfo.AutoShow and not Library.ActiveLoading then
         task.spawn(Library.Toggle)
@@ -14083,6 +14118,59 @@ function Library:CreateWindow(WindowInfo)
     Library:GiveSignal(UserInputService.WindowFocusReleased:Connect(function()
         Library.IsRobloxFocused = false
     end))
+
+    local function UpdateViewport(NewViewportSize: Vector2)
+        if NewViewportSize.X <= 0 or NewViewportSize.Y <= 0 or NewViewportSize == ViewportSize then
+            return
+        end
+
+        local OldPosition = MainFrame.AbsolutePosition
+        local OldSize = MainFrame.AbsoluteSize
+        local MaxX = math.max(1, NewViewportSize.X - 64)
+        local MaxY = math.max(1, NewViewportSize.Y - 64)
+        Library.OriginalMinSize = Vector2.new(math.min(BaseMinSize.X, MaxX), math.min(BaseMinSize.Y, MaxY))
+        Library.MinSize = Vector2.new(math.min(WindowInfo.MinContainerWidth, MaxX), Library.OriginalMinSize.Y)
+
+        local Width = math.clamp(MainFrame.Size.X.Offset, Library.MinSize.X, MaxX)
+        local Height = math.clamp(MainFrame.Size.Y.Offset, Library.MinSize.Y, MaxY)
+        local CenterX = ViewportSize.X > 0 and (OldPosition.X + OldSize.X / 2) / ViewportSize.X or 0.5
+        local CenterY = ViewportSize.Y > 0 and (OldPosition.Y + OldSize.Y / 2) / ViewportSize.Y or 0.5
+        MainFrame.Size = UDim2.fromOffset(Width, Height)
+        MainFrame.Position = UDim2.fromOffset(
+            math.clamp(CenterX * NewViewportSize.X - Width / 2, 0, math.max(0, NewViewportSize.X - Width)),
+            math.clamp(CenterY * NewViewportSize.Y - Height / 2, 0, math.max(0, NewViewportSize.Y - Height))
+        )
+        ViewportSize = NewViewportSize
+
+        UpdateResponsiveSidebar()
+
+        for _, Tab in Library.Tabs do
+            Tab:Resize(true)
+        end
+    end
+
+    local ViewportConnection
+    local function BindViewport()
+        if ViewportConnection then
+            ViewportConnection:Disconnect()
+        end
+
+        local Camera = workspace.CurrentCamera
+        if not Camera then
+            return
+        end
+
+        ViewportConnection = Camera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
+            if workspace.CurrentCamera == Camera then
+                UpdateViewport(Camera.ViewportSize)
+            end
+        end)
+        Library:GiveSignal(ViewportConnection)
+        UpdateViewport(Camera.ViewportSize)
+    end
+
+    Library:GiveSignal(workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(BindViewport))
+    BindViewport()
 
     Window.MainFrame = MainFrame
     Library.Window = Window
