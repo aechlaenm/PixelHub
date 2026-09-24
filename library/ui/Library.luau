@@ -11560,7 +11560,8 @@ function Library:CreateWindow(WindowInfo)
             Button.Padding.PaddingLeft = UDim.new(0, IsCompact and 6 or 12)
             Button.Padding.PaddingRight = UDim.new(0, IsCompact and 6 or 12)
             Button.Padding.PaddingTop = UDim.new(0, IsCompact and 6 or 11)
-            Button.Icon.SizeConstraint = IsCompact and Enum.SizeConstraint.RelativeXY or Enum.SizeConstraint.RelativeYY
+            Button.Icon.AnchorPoint = IsCompact and Vector2.new(0.5, 0.5) or Vector2.new(0, 0.5)
+            Button.Icon.Position = IsCompact and UDim2.fromScale(0.5, 0.5) or UDim2.new(0, 0, 0.5, 0)
         end
 
         for _, Category in TabCategories do
@@ -11674,6 +11675,7 @@ function Library:CreateWindow(WindowInfo)
         local TabRight
 
         Icon = Library:GetCustomIcon(Icon)
+        local TextOffset = Icon and 26 or 30
         do
             TabButton = New("TextButton", {
                 BackgroundColor3 = "MainColor",
@@ -11718,8 +11720,8 @@ function Library:CreateWindow(WindowInfo)
             })
             TabLabel = New("TextLabel", {
                 BackgroundTransparency = 1,
-                Position = UDim2.fromOffset(30, 0),
-                Size = UDim2.new(1, -30, 1, 0),
+                Position = UDim2.fromOffset(TextOffset, 0),
+                Size = UDim2.new(1, -TextOffset, 1, 0),
                 Text = Name,
                 TextSize = 16,
                 TextTransparency = 0.35,
@@ -11730,11 +11732,12 @@ function Library:CreateWindow(WindowInfo)
 
             if Icon then
                 TabIcon = New("ImageLabel", {
-                    ImageColor3 = Icon.Custom and "WhiteColor" or "AccentColor",
-                    ImageTransparency = 0.5,
+                    AnchorPoint = IsCompact and Vector2.new(0.5, 0.5) or Vector2.new(0, 0.5),
+                    ImageColor3 = "FontColor",
+                    ImageTransparency = 0.35,
+                    Position = IsCompact and UDim2.fromScale(0.5, 0.5) or UDim2.new(0, 0, 0.5, 0),
                     ScaleType = Enum.ScaleType.Fit,
-                    Size = UDim2.fromScale(1, 1),
-                    SizeConstraint = IsCompact and Enum.SizeConstraint.RelativeXY or Enum.SizeConstraint.RelativeYY,
+                    Size = UDim2.fromOffset(16, 16),
                     Parent = ButtonHolder,
                 })
                 Library:ApplyLucideIcon(TabIcon, Icon)
@@ -12834,7 +12837,7 @@ function Library:CreateWindow(WindowInfo)
             }):Play()
             if TabIcon then
                 TweenService:Create(TabIcon, Library.TweenInfo, {
-                    ImageTransparency = Hovering and 0.25 or 0.5,
+                    ImageTransparency = Hovering and 0.25 or 0.35,
                 }):Play()
             end
         end
@@ -12896,7 +12899,7 @@ function Library:CreateWindow(WindowInfo)
 
             if TabIcon then
                 TweenService:Create(TabIcon, Library.TweenInfo, {
-                    ImageTransparency = 0.5,
+                    ImageTransparency = 0.35,
                 }):Play()
             end
 
@@ -13044,6 +13047,7 @@ function Library:CreateWindow(WindowInfo)
         local TabContainer
 
         Icon = if Icon == "key" then KeyIcon else Library:GetCustomIcon(Icon)
+        local TextOffset = Icon and 26 or 30
         do
             TabButton = New("TextButton", {
                 BackgroundColor3 = "MainColor",
@@ -13089,8 +13093,8 @@ function Library:CreateWindow(WindowInfo)
 
             TabLabel = New("TextLabel", {
                 BackgroundTransparency = 1,
-                Position = UDim2.fromOffset(30, 0),
-                Size = UDim2.new(1, -30, 1, 0),
+                Position = UDim2.fromOffset(TextOffset, 0),
+                Size = UDim2.new(1, -TextOffset, 1, 0),
                 Text = Name,
                 TextSize = 16,
                 TextTransparency = 0.35,
@@ -13101,11 +13105,12 @@ function Library:CreateWindow(WindowInfo)
 
             if Icon then
                 TabIcon = New("ImageLabel", {
-                    ImageColor3 = Icon.Custom and "WhiteColor" or "AccentColor",
-                    ImageTransparency = 0.5,
+                    AnchorPoint = IsCompact and Vector2.new(0.5, 0.5) or Vector2.new(0, 0.5),
+                    ImageColor3 = "FontColor",
+                    ImageTransparency = 0.35,
+                    Position = IsCompact and UDim2.fromScale(0.5, 0.5) or UDim2.new(0, 0, 0.5, 0),
                     ScaleType = Enum.ScaleType.Fit,
-                    Size = UDim2.fromScale(1, 1),
-                    SizeConstraint = IsCompact and Enum.SizeConstraint.RelativeXY or Enum.SizeConstraint.RelativeYY,
+                    Size = UDim2.fromOffset(16, 16),
                     Parent = ButtonHolder,
                 })
                 Library:ApplyLucideIcon(TabIcon, Icon)
@@ -13289,7 +13294,7 @@ function Library:CreateWindow(WindowInfo)
             }):Play()
             if TabIcon then
                 TweenService:Create(TabIcon, Library.TweenInfo, {
-                    ImageTransparency = Hovering and 0.25 or 0.5,
+                    ImageTransparency = Hovering and 0.25 or 0.35,
                 }):Play()
             end
         end
@@ -13355,7 +13360,7 @@ function Library:CreateWindow(WindowInfo)
 
             if TabIcon then
                 TweenService:Create(TabIcon, Library.TweenInfo, {
-                    ImageTransparency = 0.5,
+                    ImageTransparency = 0.35,
                 }):Play()
             end
 
