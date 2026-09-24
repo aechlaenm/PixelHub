@@ -1,17 +1,63 @@
-local repo = "https://raw.githubusercontent.com/aechlaenm/PixelHub/1d5520990e2c751d53ac7f6495afe200bd94a742/"
+local repo = "https://raw.githubusercontent.com/aechlaenm/PixelHub/04a08ad3b5924d80e9079721a3fc01e02c40fae9/"
 local environment = (getgenv and getgenv()) or shared or _G
 
 if not game:IsLoaded() then
 	game.Loaded:Wait()
 end
 
+local httpFetch = (function()
+	local candidates = {
+		{ name = "request", kind = "request" },
+		{ name = "http_request", kind = "request" },
+		{ name = "syn", kind = "syn" },
+		{ name = "fluxus", kind = "fluxus" },
+	}
+	local env = environment
+	for _, c in ipairs(candidates) do
+		local fn = env[c.name]
+		if type(fn) == "function" then
+			if c.kind == "request" then
+				return function(url)
+					local res = fn({ Url = url, Method = "GET" })
+					if type(res) == "string" then return res end
+					if type(res) == "table" and type(res.Body) == "string" then return res.Body end
+					return nil
+				end
+			elseif c.kind == "syn" and type(fn.request) == "function" then
+				return function(url)
+					local res = fn.request({ Url = url, Method = "GET" })
+					if type(res) == "string" then return res end
+					if type(res) == "table" and type(res.Body) == "string" then return res.Body end
+					return nil
+				end
+			elseif c.kind == "fluxus" and type(fn.request) == "function" then
+				return function(url)
+					local res = fn.request({ Url = url, Method = "GET" })
+					if type(res) == "string" then return res end
+					if type(res) == "table" and type(res.Body) == "string" then return res.Body end
+					return nil
+				end
+			end
+		end
+	end
+	local get = game.HttpGet
+	return function(url)
+		return get(game, url)
+	end
+end)()
+
 local function unloadPrevious()
 	local unloaded = false
-	if type(environment.PixelHubUnload) == "function" then
+	local state = environment.PixelHubState
+	if type(state) == "table" and type(state.Unload) == "function" then
+		unloaded = pcall(state.Unload)
+	end
+
+	if not unloaded and type(environment.PixelHubUnload) == "function" then
 		unloaded = pcall(environment.PixelHubUnload)
 	end
 
-	local previous = environment.PixelHubLibrary or environment.library or environment.Library
+	local previous = environment.PixelHubLibrary
 	if not unloaded and type(previous) == "table" and type(previous.Unload) == "function" then
 		for _, toggle in previous.Toggles or {} do
 			if toggle.Value and type(toggle.SetValue) == "function" then
@@ -20,13 +66,34 @@ local function unloadPrevious()
 		end
 		pcall(previous.Unload, previous)
 	end
-
+	if type(previous) == "table" then
+		for _, key in { "PixelHubLibrary", "Library", "library" } do
+			if environment[key] == previous then
+				environment[key] = nil
+			end
+		end
+	end
 end
 unloadPrevious()
 
 local function loadModule(path)
-	local url = repo .. path .. "?v=" .. tostring(os.time()) .. tostring(math.random(100000, 999999))
-	local chunk, compileError = loadstring(game:HttpGet(url))
+	local url = repo .. path .. "?v=" .. tostring(os.time()) .. math.random(100000, 999999)
+
+	local ok, source = pcall(httpFetch, url)
+	if not ok or type(source) ~= "string" then
+		error(string.format("Fetch failed for %s: %s", path, tostring(source)))
+	end
+
+	if #source < 64 then
+		error("Suspiciously short response for " .. path)
+	end
+
+	local head = source:sub(1, 64):lower()
+	if head:find("<!doctype") or head:find("<html") or head:find("404: not found") then
+		error("Non-Lua response for " .. path)
+	end
+
+	local chunk, compileError = loadstring(source)
 	assert(chunk, string.format("Failed to compile %s: %s", path, tostring(compileError)))
 
 	local module = chunk()
@@ -36,10 +103,8 @@ end
 
 local Library = loadModule("library/ui/Library.luau")
 assert(type(Library.CreateWindow) == "function", "Obsidian Library missing CreateWindow")
-environment.Library = Library
-environment.PixelHubLibrary = Library
-environment.library = Library
 
+local state
 local function unload()
 	if not Library.Unloaded then
 		for _, toggle in Library.Toggles do
@@ -50,16 +115,12 @@ local function unload()
 		Library:Unload()
 	end
 
-	for _, key in { "PixelHubLibrary", "Library", "library" } do
-		if environment[key] == Library then
-			environment[key] = nil
-		end
-	end
-	if environment.PixelHubUnload == unload then
-		environment.PixelHubUnload = nil
+	if environment.PixelHubState == state then
+		environment.PixelHubState = nil
 	end
 end
-environment.PixelHubUnload = unload
+state = { Unload = unload, Library = Library }
+environment.PixelHubState = state
 
 local ThemeManager = loadModule("library/ui/addons/ThemeManager.luau")
 local SaveManager = loadModule("library/ui/addons/SaveManager.luau")
