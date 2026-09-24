@@ -10895,7 +10895,7 @@ function Library:CreateWindow(WindowInfo)
             Size = UDim2.fromScale(1, 1),
             Text = SpaceLetters(string.upper(Category)),
             TextColor3 = "FontColor",
-            TextSize = 11,
+            TextSize = 13,
             TextTransparency = 0.45,
             TextXAlignment = Enum.TextXAlignment.Left,
             Parent = HeaderRow,
