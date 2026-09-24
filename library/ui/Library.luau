@@ -10871,7 +10871,7 @@ function Library:CreateWindow(WindowInfo)
             Parent = Tabs,
         })
         local Padding = New("UIPadding", {
-            PaddingTop = UDim.new(0, IsCompact and 0 or 14),
+            PaddingTop = UDim.new(0, IsCompact and 0 or 10),
             Parent = Frame,
         })
         New("UIListLayout", {
@@ -11575,7 +11575,7 @@ function Library:CreateWindow(WindowInfo)
 
         for _, Category in TabCategories do
             Category.HeaderRow.Visible = not IsCompact
-            Category.Padding.PaddingTop = UDim.new(0, IsCompact and 0 or 14)
+            Category.Padding.PaddingTop = UDim.new(0, IsCompact and 0 or 10)
         end
     end
 
