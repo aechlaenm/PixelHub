@@ -1,4 +1,4 @@
-local repo = "https://raw.githubusercontent.com/aechlaenm/PixelHub/c0ae14df4dd23e7a396bf4976cc2c20b3b5bc785/"
+local repo = "https://raw.githubusercontent.com/aechlaenm/XebeczHub/c0ae14df4dd23e7a396bf4976cc2c20b3b5bc785/"
 local environment = (getgenv and getgenv()) or shared or _G
 
 if not game:IsLoaded() then
@@ -48,16 +48,17 @@ end)()
 
 local function unloadPrevious()
 	local unloaded = false
-	local state = environment.PixelHubState
+	local state = environment.XebeczHubState or environment.PixelHubState
 	if type(state) == "table" and type(state.Unload) == "function" then
 		unloaded = pcall(state.Unload)
 	end
 
-	if not unloaded and type(environment.PixelHubUnload) == "function" then
-		unloaded = pcall(environment.PixelHubUnload)
+	local previousUnload = environment.XebeczHubUnload or environment.PixelHubUnload
+	if not unloaded and type(previousUnload) == "function" then
+		unloaded = pcall(previousUnload)
 	end
 
-	local previous = environment.PixelHubLibrary
+	local previous = environment.XebeczHubLibrary or environment.PixelHubLibrary
 	if not unloaded and type(previous) == "table" and type(previous.Unload) == "function" then
 		for _, toggle in previous.Toggles or {} do
 			if toggle.Value and type(toggle.SetValue) == "function" then
@@ -67,7 +68,7 @@ local function unloadPrevious()
 		pcall(previous.Unload, previous)
 	end
 	if type(previous) == "table" then
-		for _, key in { "PixelHubLibrary", "Library", "library" } do
+		for _, key in { "XebeczHubLibrary", "PixelHubLibrary", "Library", "library" } do
 			if environment[key] == previous then
 				environment[key] = nil
 			end
@@ -115,21 +116,21 @@ local function unload()
 		Library:Unload()
 	end
 
-	if environment.PixelHubState == state then
-		environment.PixelHubState = nil
+	if environment.XebeczHubState == state then
+		environment.XebeczHubState = nil
 	end
 end
 state = { Unload = unload, Library = Library }
-environment.PixelHubState = state
+environment.XebeczHubState = state
 
 local ThemeManager = loadModule("library/ui/addons/ThemeManager.luau")
 local SaveManager = loadModule("library/ui/addons/SaveManager.luau")
 
 ThemeManager:SetLibrary(Library)
-ThemeManager:SetFolder("PixelHub")
+ThemeManager:SetFolder("Xebecz Hub")
 SaveManager:SetLibrary(Library)
 SaveManager:IgnoreThemeSettings()
-SaveManager:SetFolder("PixelHub")
+SaveManager:SetFolder("Xebecz Hub")
 SaveManager:SetSubFolder("Test")
 
 local gameName = game.Name
@@ -141,10 +142,10 @@ pcall(function()
 end)
 
 local window = Library:CreateWindow({
-	Title = "PixelHub",
+	Title = "Xebecz Hub",
 	GameName = gameName,
 	Version = "v" .. tostring(game.PlaceVersion),
-	Footer = "PixelHub",
+	Footer = "Xebecz Hub",
 	Center = true,
 	AutoShow = true,
 	ShowCustomCursor = false,
@@ -181,8 +182,8 @@ local settings = window:AddTab({
 })
 SaveManager:BuildConfigSection(settings)
 ThemeManager:ApplyToTab(settings)
-settings:AddGroupbox({ Name = "PixelHub", Side = "Right" }):AddButton({
-	Text = "Unload PixelHub",
+settings:AddGroupbox({ Name = "Xebecz Hub", Side = "Right" }):AddButton({
+	Text = "Unload Xebecz Hub",
 	Func = unload,
 })
 SaveManager:LoadAutoloadConfig()
